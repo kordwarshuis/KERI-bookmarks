@@ -4,7 +4,7 @@ A static field guide to [Key Event Receipt Infrastructure](https://keri.foundati
 
 Open `index.html` in a browser. There is no build step.
 
-Drag a card’s handle to reorder it, including into another section. Drag a section handle to reorder sections. The arrangement is stored in `localStorage` for this browser.
+Drag a card’s handle to reorder it, including into another section. Drag a section handle to reorder sections. The pencil renames a section; the cross deletes that section and the bookmarks inside it. The arrangement is stored in `localStorage` for this browser.
 
 **Add bookmark** and **Add section** keep new items in this browser. **Copy HTML** puts the current page on the clipboard — paste it over `index.html` and deploy that file when the new order should be the one everyone sees. **Reset layout** forgets this browser’s saved arrangement and reloads the file.
 

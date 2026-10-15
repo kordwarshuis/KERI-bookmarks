@@ -580,6 +580,7 @@ a.card-art {
 }
 
 .section-grip,
+.section-rename,
 .section-remove,
 .slot-bar button {
   display: inline-flex;
@@ -591,6 +592,7 @@ a.card-art {
 }
 
 .section-grip,
+.section-rename,
 .section-remove {
   width: 1.45rem;
   height: 1.7rem;
@@ -615,10 +617,14 @@ a.card-art {
   height: 0.85rem;
 }
 
+.section-rename,
 .section-remove {
-  color: var(--copper);
   font-size: 0.95rem;
   line-height: 1;
+}
+
+.section-remove {
+  color: var(--copper);
 }
 
 .grid {
@@ -662,6 +668,8 @@ a.card-art {
 .slot-bar button:focus-visible,
 .section-grip:hover,
 .section-grip:focus-visible,
+.section-rename:hover,
+.section-rename:focus-visible,
 .section-remove:hover,
 .section-remove:focus-visible {
   background: var(--paper-2);

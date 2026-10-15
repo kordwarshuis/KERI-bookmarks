@@ -18,6 +18,7 @@ const sortables = [];
 
 let state = loadState() || blankState();
 let editingId = null;
+let editingSection = null;
 let statusTimer = 0;
 
 function blankState() {
@@ -28,7 +29,9 @@ function blankState() {
     addedCards: {},
     customCards: {},
     addedSections: {},
+    customSections: {},
     removed: [],
+    removedSections: [],
   };
 }
 
@@ -42,6 +45,7 @@ function loadState() {
       ...blankState(),
       ...data,
       removed: Array.isArray(data.removed) ? data.removed : [],
+      removedSections: Array.isArray(data.removedSections) ? data.removedSections : [],
     };
   } catch {
     return null;
@@ -120,8 +124,25 @@ function elementFromHTML(html) {
   return holder.content.firstElementChild;
 }
 
+function applySectionMeta(section, meta) {
+  if (!section || !meta) return;
+  const heading = section.querySelector("h2");
+  if (heading) heading.textContent = meta.title;
+  const blurb = section.querySelector(".section-head p");
+  if (blurb) blurb.textContent = meta.description || "";
+  section.classList.toggle("is-draft", Boolean(meta.draft));
+  ensureNavLink(section.id, meta.title);
+}
+
 function applyState() {
   if (!localStorage.getItem(STORAGE_KEY)) return;
+
+  (state.removedSections || []).forEach((id) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    section.remove();
+    document.querySelector(`.header-nav a[href="#${CSS.escape(id)}"]`)?.remove();
+  });
 
   assignIds(document);
   const cards = new Map();
@@ -156,9 +177,24 @@ function applyState() {
   });
 
   Object.entries(state.addedSections || {}).forEach(([id, meta]) => {
-    if (document.getElementById(id)) return;
+    if ((state.removedSections || []).includes(id)) return;
+    const existing = document.getElementById(id);
+    if (existing) {
+      existing.dataset.added = "true";
+      applySectionMeta(existing, meta);
+      const mark = existing.querySelector(".section-mark");
+      mark?.replaceWith(elementFromHTML(sectionMark(Boolean(meta.draft))));
+      return;
+    }
     main.appendChild(buildSection(meta));
     ensureNavLink(id, meta.title);
+  });
+
+  Object.entries(state.customSections || {}).forEach(([id, meta]) => {
+    const section = document.getElementById(id);
+    if (!section || section.dataset.added === "true") return;
+    section.dataset.custom = "true";
+    applySectionMeta(section, meta);
   });
 
   const knownSections = new Set(state.sectionOrder || []);
@@ -210,18 +246,14 @@ function snapshot() {
   const next = {
     ...blankState(),
     removed: [...state.removed],
+    removedSections: [...state.removedSections],
   };
   document.querySelectorAll(".section").forEach((section) => {
     next.sectionOrder.push(section.id);
     next.cardOrder[section.id] = [...section.querySelectorAll(".card")].map((card) => card.dataset.id);
-    if (section.dataset.added === "true") {
-      next.addedSections[section.id] = {
-        id: section.id,
-        title: section.querySelector("h2")?.textContent.trim() || section.id,
-        description: section.querySelector(".section-head p")?.textContent.trim() || "",
-        draft: section.classList.contains("is-draft"),
-      };
-    }
+    const meta = sectionMeta(section);
+    if (section.dataset.added === "true") next.addedSections[section.id] = meta;
+    else if (section.dataset.custom === "true") next.customSections[section.id] = meta;
   });
   document.querySelectorAll(".card[data-added='true']").forEach((card) => {
     next.addedCards[card.dataset.id] = cardRecordHTML(card);
@@ -281,13 +313,31 @@ function decorateSection(section) {
   if (!head || head.querySelector(".section-tools")) return;
   const tools = document.createElement("div");
   tools.className = "section-tools";
-  tools.appendChild(gripButton("section-grip", "Drag section"));
-  if (section.dataset.added === "true") {
-    const remove = iconButton("section-remove", "Remove section", "×");
-    remove.addEventListener("click", () => removeSection(section));
-    tools.appendChild(remove);
-  }
+  const rename = iconButton("section-rename", "Rename section", "✎");
+  const remove = iconButton("section-remove", "Remove section", "×");
+  rename.addEventListener("click", () => openSectionDialog(section));
+  remove.addEventListener("click", () => removeSection(section));
+  tools.append(gripButton("section-grip", "Drag section"), rename, remove);
   head.prepend(tools);
+}
+
+function sectionMeta(section) {
+  return {
+    id: section.id,
+    title: section.querySelector("h2")?.textContent.trim() || section.id,
+    description: section.querySelector(".section-head p")?.textContent.trim() || "",
+    draft: section.classList.contains("is-draft"),
+  };
+}
+
+function writeSection(section, meta) {
+  applySectionMeta(section, meta);
+  if (section.dataset.added === "true") {
+    const mark = section.querySelector(".section-mark");
+    mark?.replaceWith(elementFromHTML(sectionMark(Boolean(meta.draft))));
+  } else {
+    section.dataset.custom = "true";
+  }
 }
 
 function wrapCard(card) {
@@ -715,10 +765,13 @@ function removeCard(card) {
 
 function removeSection(section) {
   const title = section.querySelector("h2")?.textContent.trim() || "this section";
-  if (!window.confirm(`Remove the “${title}” section and the bookmarks inside it?`)) return;
+  const count = section.querySelectorAll(".card").length;
+  const detail = count === 1 ? "1 bookmark inside it" : `${count} bookmarks inside it`;
+  if (!window.confirm(`Remove the “${title}” section and the ${detail}?`)) return;
   section.querySelectorAll(".card").forEach((card) => {
     if (!state.removed.includes(card.dataset.id)) state.removed.push(card.dataset.id);
   });
+  if (!state.removedSections.includes(section.id)) state.removedSections.push(section.id);
   document.querySelector(`.header-nav a[href="#${CSS.escape(section.id)}"]`)?.remove();
   section.remove();
   renumber();
@@ -727,14 +780,39 @@ function removeSection(section) {
   setStatus("Section removed in this browser.");
 }
 
+function openSectionDialog(section) {
+  const form = document.querySelector("#section-form");
+  form.reset();
+  editingSection = section || null;
+  document.querySelector("#section-dialog-title").textContent = section ? "Rename section" : "Add section";
+  document.querySelector("#section-save").textContent = section ? "Save section" : "Add section";
+  if (section) {
+    const meta = sectionMeta(section);
+    document.querySelector("#section-name").value = meta.title;
+    document.querySelector("#section-description").value = meta.description;
+    document.querySelector("#section-draft").checked = meta.draft;
+  }
+  sectionDialog.showModal();
+  document.querySelector("#section-name").focus();
+}
+
 function saveSection(event) {
   event.preventDefault();
-  const name = document.querySelector("#section-name").value.trim();
-  const section = mountSection({
-    id: uniqueId(name, takenSectionId),
-    title: name,
+  const meta = {
+    title: document.querySelector("#section-name").value.trim(),
     description: document.querySelector("#section-description").value.trim(),
     draft: document.querySelector("#section-draft").checked,
+  };
+  if (editingSection) {
+    writeSection(editingSection, meta);
+    sectionDialog.close();
+    snapshot();
+    setStatus("Section saved in this browser.");
+    return;
+  }
+  const section = mountSection({
+    id: uniqueId(meta.title, takenSectionId),
+    ...meta,
   });
   sectionDialog.close();
   snapshot();
@@ -818,7 +896,16 @@ function pageHTML() {
     const card = slot.querySelector(".card");
     if (card) slot.replaceWith(card);
   });
-  clone.querySelectorAll(".section-tools").forEach((tools) => tools.remove());
+  clone.querySelectorAll(".section-tools, grammarly-desktop-integration").forEach((node) => node.remove());
+  clone.querySelectorAll("script").forEach((script) => {
+    if (script.textContent.includes("IsThisFirstTime_Log_From_LiveServer")) script.remove();
+  });
+  const comments = document.createTreeWalker(clone, NodeFilter.SHOW_COMMENT);
+  const injected = [];
+  while (comments.nextNode()) {
+    if (comments.currentNode.textContent.includes("live-server")) injected.push(comments.currentNode);
+  }
+  injected.forEach((node) => node.remove());
   clone.querySelectorAll("dialog").forEach((dialog) => dialog.removeAttribute("open"));
   clone.querySelectorAll("#editor-status").forEach((status) => {
     status.textContent = "";
@@ -875,11 +962,7 @@ filterInput?.addEventListener("search", filterBookmarks);
 filterInput?.addEventListener("change", filterBookmarks);
 
 document.querySelector("#add-bookmark")?.addEventListener("click", () => openBookmarkDialog(null));
-document.querySelector("#add-section")?.addEventListener("click", () => {
-  document.querySelector("#section-form").reset();
-  sectionDialog.showModal();
-  document.querySelector("#section-name").focus();
-});
+document.querySelector("#add-section")?.addEventListener("click", () => openSectionDialog(null));
 document.querySelector("#copy-html")?.addEventListener("click", () => {
   copyHTML();
 });
