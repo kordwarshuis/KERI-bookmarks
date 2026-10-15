@@ -512,8 +512,7 @@ function buildSection(meta) {
   const blurb = document.createElement("p");
   blurb.textContent = meta.description || "";
   copy.append(heading, blurb);
-  header.append(num, copy);
-  header.appendChild(elementFromHTML(sectionMark(Boolean(meta.draft))));
+  header.append(num, elementFromHTML(sectionMark(Boolean(meta.draft))), copy);
   const grid = document.createElement("div");
   grid.className = "grid";
   section.append(header, grid);
