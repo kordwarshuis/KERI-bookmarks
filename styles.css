@@ -432,6 +432,43 @@ a.card-art {
   line-height: 1.4;
 }
 
+/* Hide descriptions on fine pointers; expand on hover without shifting the grid.
+   Cards stay absolutely positioned so enter/leave never reflows the slot. */
+@media (hover: hover) and (pointer: fine) {
+  .slot > .card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .card p {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: max-height 220ms ease, opacity 160ms ease;
+  }
+
+  .slot:hover,
+  .slot:focus-within {
+    z-index: 8;
+  }
+
+  .slot:hover > .card,
+  .slot:focus-within > .card {
+    z-index: 1;
+  }
+
+  .slot:hover > .card p,
+  .slot:focus-within > .card p,
+  .card:focus-visible p,
+  .card:has(a:focus-visible) p {
+    max-height: 8rem;
+    opacity: 1;
+  }
+}
+
 .host {
   margin-top: 0.28rem;
   font-size: 0.64rem;

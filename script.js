@@ -341,6 +341,17 @@ function writeSection(section, meta) {
   }
 }
 
+function lockSlotSize(slot, card) {
+  const sync = () => {
+    if (slot.matches(":hover, :focus-within")) return;
+    slot.style.minHeight = `${Math.ceil(card.getBoundingClientRect().height)}px`;
+  };
+  sync();
+  requestAnimationFrame(sync);
+  if (document.fonts?.ready) document.fonts.ready.then(sync);
+  slot._syncSize = sync;
+}
+
 function wrapCard(card) {
   if (card.closest(".slot")) return card.closest(".slot");
   const slot = document.createElement("div");
@@ -355,6 +366,7 @@ function wrapCard(card) {
   bar.append(grip, edit, remove);
   card.before(slot);
   slot.append(bar, card);
+  lockSlotSize(slot, card);
   return slot;
 }
 
@@ -632,6 +644,7 @@ function writeCard(card, fields) {
   host.textContent = hostname(fields.url);
   ensureRepoLink(target, fields.repo);
   if (target.dataset.added !== "true") target.dataset.custom = "true";
+  target.closest(".slot")?._syncSize?.();
   return target;
 }
 
@@ -956,6 +969,9 @@ function init() {
     document.documentElement.classList.remove("layout-pending");
   }
   filterBookmarks();
+  window.addEventListener("resize", () => {
+    document.querySelectorAll(".slot").forEach((slot) => slot._syncSize?.());
+  });
 }
 
 filterInput?.addEventListener("input", filterBookmarks);
