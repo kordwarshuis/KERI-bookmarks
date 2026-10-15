@@ -28,7 +28,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=14">
+  <link rel="stylesheet" href="styles.css?v=15">
   <style></style>
 </head>
 
@@ -1030,6 +1030,7 @@
   </main>
   <footer class="site-footer">
     <div class="editor-bar">
+      <button type="button" id="toggle-edit" aria-pressed="false">Edit layout</button>
       <button type="button" id="add-bookmark">Add bookmark</button>
       <button type="button" id="add-section">Add section</button>
       <button type="button" id="copy-html">Copy HTML</button>
@@ -1037,8 +1038,8 @@
       <p id="editor-status" role="status"></p>
     </div>
     <p><strong>KERI bookmarks</strong> — an illustrated index for the suite.</p>
-    <p>Drag the handles to rearrange. Additions stay in this browser until you copy the HTML and save it over this file.
-    </p>
+    <p>Use Edit layout to show drag handles and edit controls. Additions stay in this browser until you copy the HTML and
+      save it over this file.</p>
   </footer>
   <dialog id="bookmark-dialog" aria-labelledby="bookmark-dialog-title">
     <form id="bookmark-form">
@@ -1128,9 +1129,13 @@
   <dialog id="help-dialog" aria-labelledby="help-dialog-title">
     <h2 id="help-dialog-title">Arranging bookmarks</h2>
     <div class="help-body">
-      <p>Drag a card or section handle to reorder. Renames, deletes, and new items are kept in this browser’s
-        <code>localStorage</code> until you copy the HTML into the file.</p>
+      <p>Turn on <strong>Edit layout</strong> in the footer to reveal drag handles and edit controls. Renames, deletes,
+        and new items are kept in this browser’s <code>localStorage</code> until you copy the HTML into the file.</p>
       <dl class="help-list">
+        <div>
+          <dt>Edit layout</dt>
+          <dd>Shows or hides the per-card and per-section handles, pencils, and delete buttons.</dd>
+        </div>
         <div>
           <dt>Add bookmark</dt>
           <dd>Creates a card in the section you pick. It stays in this browser only until you copy the HTML.</dd>

@@ -7,6 +7,7 @@ const TRANSIENT_CLASSES = [
   "sortable-drag",
   "sortable-fallback",
   "hidden-section",
+  "edit-mode",
 ];
 
 const filterInput = document.querySelector("#filter");
@@ -415,6 +416,26 @@ function setSortingEnabled(enabled) {
   sortables.forEach((sortable) => sortable.option("disabled", !enabled));
 }
 
+function isEditMode() {
+  return document.body.classList.contains("edit-mode");
+}
+
+function syncSorting() {
+  const query = normalize(filterInput?.value.trim() || "");
+  setSortingEnabled(isEditMode() && query === "");
+}
+
+function setEditMode(enabled) {
+  document.body.classList.toggle("edit-mode", enabled);
+  const toggle = document.querySelector("#toggle-edit");
+  if (toggle) {
+    toggle.setAttribute("aria-pressed", enabled ? "true" : "false");
+    toggle.textContent = enabled ? "Done editing" : "Edit layout";
+  }
+  syncSorting();
+  setStatus(enabled ? "Edit controls visible. Drag handles to rearrange." : "Edit controls hidden.");
+}
+
 function filterBookmarks() {
   const query = normalize(filterInput?.value.trim() || "");
   let visible = 0;
@@ -429,7 +450,7 @@ function filterBookmarks() {
     section.classList.toggle("hidden-section", Boolean(query) && !any);
   });
   if (empty) empty.hidden = visible !== 0;
-  setSortingEnabled(query === "");
+  syncSorting();
 }
 
 function illustration(seed) {
@@ -1002,6 +1023,9 @@ document.addEventListener("keydown", (event) => {
   filterInput?.select();
 });
 
+document.querySelector("#toggle-edit")?.addEventListener("click", () => {
+  setEditMode(!isEditMode());
+});
 document.querySelector("#add-bookmark")?.addEventListener("click", () => openBookmarkDialog(null));
 document.querySelector("#add-section")?.addEventListener("click", () => openSectionDialog(null));
 document.querySelector("#copy-html")?.addEventListener("click", () => {

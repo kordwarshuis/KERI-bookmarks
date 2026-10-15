@@ -676,9 +676,13 @@ a.card-art {
 }
 
 .section-tools {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.25rem;
+}
+
+body.edit-mode .section-tools {
+  display: flex;
 }
 
 .section-grip,
@@ -749,13 +753,17 @@ a.card-art {
   z-index: 3;
   top: 0.4rem;
   left: 0.4rem;
-  display: flex;
+  display: none;
   gap: 0.05rem;
   padding: 0.1rem;
   background: color-mix(in srgb, var(--paper) 90%, white);
   border: 1.5px solid var(--ink);
   border-radius: 999px;
   box-shadow: 2px 2px 0 var(--ink);
+}
+
+body.edit-mode .slot-bar {
+  display: flex;
 }
 
 .slot-bar button {
@@ -785,14 +793,19 @@ a.card-art {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .slot-bar {
+  body.edit-mode .slot-bar {
     opacity: 0;
   }
 
-  .slot:hover .slot-bar,
-  .slot:focus-within .slot-bar {
+  body.edit-mode .slot:hover .slot-bar,
+  body.edit-mode .slot:focus-within .slot-bar {
     opacity: 1;
   }
+}
+
+#toggle-edit[aria-pressed="true"] {
+  background: var(--leaf);
+  color: var(--paper);
 }
 
 .slot.is-ghost {
