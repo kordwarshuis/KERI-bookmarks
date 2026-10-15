@@ -458,7 +458,7 @@ function illustration(seed) {
   ];
   const body = bodies[hash(`${seed}:art`) % bodies.length];
   return elementFromHTML(
-    `<svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice"><rect width="320" height="140" fill="${palette.bg}"/>${body}</svg>`,
+    `<svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid meet"><rect width="320" height="140" fill="${palette.bg}"/>${body}</svg>`,
   );
 }
 
