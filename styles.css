@@ -564,6 +564,20 @@ a.card-art {
   color: var(--paper);
 }
 
+#editor-help {
+  background: transparent;
+  box-shadow: none;
+  border-style: dashed;
+  color: var(--ink-soft);
+}
+
+#editor-help:hover,
+#editor-help:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
 #editor-status {
   flex: 1 1 100%;
   margin: 0;
@@ -788,6 +802,53 @@ dialog select:focus {
 
 .dialog-note code {
   font-size: 0.85em;
+}
+
+.help-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.help-body > p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.help-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.help-list > div {
+  margin: 0;
+}
+
+.help-list dt {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.help-list dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.help-body code,
+.help-list code {
+  font-size: 0.9em;
+}
+
+#help-dialog {
+  max-width: 26rem;
 }
 
 .dialog-actions {

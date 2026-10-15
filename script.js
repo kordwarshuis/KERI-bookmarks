@@ -14,6 +14,7 @@ const empty = document.querySelector("#empty");
 const main = document.querySelector("main");
 const bookmarkDialog = document.querySelector("#bookmark-dialog");
 const sectionDialog = document.querySelector("#section-dialog");
+const helpDialog = document.querySelector("#help-dialog");
 const sortables = [];
 
 let state = loadState() || blankState();
@@ -975,6 +976,10 @@ document.querySelector("#reset-layout")?.addEventListener("click", () => {
   localStorage.removeItem(STORAGE_KEY);
   location.reload();
 });
+document.querySelector("#editor-help")?.addEventListener("click", () => {
+  helpDialog?.showModal();
+});
+document.querySelector("#help-close")?.addEventListener("click", () => helpDialog?.close());
 document.querySelector("#bookmark-form")?.addEventListener("submit", saveBookmark);
 document.querySelector("#bookmark-cancel")?.addEventListener("click", () => bookmarkDialog.close());
 document.querySelector("#bookmark-section")?.addEventListener("change", toggleNewSectionFields);
