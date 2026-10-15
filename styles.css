@@ -39,7 +39,6 @@ body {
   text-align: center;
   background-color: var(--paper);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cpath d='M8 36h10m6 0h10m6 0h10m6 0h10' stroke='%23d6c8ae' stroke-width='1.2' fill='none' opacity='.45'/%3E%3Ccircle cx='21' cy='36' r='2.2' fill='%23c4a574' opacity='.4'/%3E%3Ccircle cx='37' cy='36' r='2.2' fill='%232a6b4a' opacity='.28'/%3E%3Ccircle cx='53' cy='36' r='2.2' fill='%23a85a32' opacity='.28'/%3E%3C/svg%3E"),
     radial-gradient(1200px 600px at 50% -10%, #fbf7ef 0%, transparent 55%),
     radial-gradient(900px 500px at 50% 0%, #e7f0e4 0%, transparent 50%);
   background-attachment: fixed;
