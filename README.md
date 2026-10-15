@@ -11,6 +11,7 @@ Open `index.html` in a browser. There is no build step.
 | Search | Term lookup, the KERI suite search engine, and GitHub search |
 | Visualisation | Value-system graph and term visualiser |
 | Websites | Foundation and conference sites |
+| Tools | Hands-on utilities (schemas, logs, SAIDs, IPEX, and more) |
 | Education | Learning hub and concept cards |
 | Tutorials | Narrative walkthroughs and jargon guides |
 | Specifications | KSWG specs (ACDC, KERI, CESR) and ToIP glossaries published with Spec-Up-T |
