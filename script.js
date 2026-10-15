@@ -267,13 +267,19 @@ function snapshot() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
+function appendNavItem(nav, node) {
+  const help = nav.querySelector("#editor-help");
+  if (help) nav.insertBefore(node, help);
+  else nav.appendChild(node);
+}
+
 function renumber() {
   const nav = document.querySelector(".header-nav");
   document.querySelectorAll(".section").forEach((section, index) => {
     const num = section.querySelector(".section-num");
     if (num) num.textContent = String(index + 1).padStart(2, "0");
     const link = nav?.querySelector(`a[href="#${CSS.escape(section.id)}"]`);
-    if (link) nav.appendChild(link);
+    if (link) appendNavItem(nav, link);
   });
 }
 
@@ -284,7 +290,7 @@ function ensureNavLink(id, title) {
   if (!link) {
     link = document.createElement("a");
     link.href = `#${id}`;
-    nav.appendChild(link);
+    appendNavItem(nav, link);
   }
   link.textContent = title;
 }
