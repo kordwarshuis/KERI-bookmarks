@@ -527,6 +527,268 @@ a.card-art {
   display: none;
 }
 
+.editor-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem 0.45rem;
+  padding: 0.55rem 1rem 0;
+}
+
+.editor-bar button,
+.dialog-actions button {
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+  background: #fffdf8;
+  color: var(--ink);
+  padding: 0.32rem 0.75rem;
+  box-shadow: 2px 2px 0 var(--ink);
+  cursor: pointer;
+}
+
+.editor-bar button:hover,
+.editor-bar button:focus-visible,
+.dialog-actions button:hover,
+.dialog-actions button:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--leaf);
+  outline: none;
+}
+
+#copy-html {
+  background: var(--leaf);
+  color: var(--paper);
+}
+
+#editor-status {
+  flex: 1 1 100%;
+  margin: 0;
+  min-height: 1.1em;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--leaf-deep);
+}
+
+.section-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.section-grip,
+.section-remove,
+.slot-bar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.section-grip,
+.section-remove {
+  width: 1.45rem;
+  height: 1.7rem;
+  border: 1.5px solid var(--line);
+  border-radius: 0.4rem;
+  background: #fffdf8;
+}
+
+.section-grip {
+  cursor: grab;
+  color: var(--ink-soft);
+}
+
+.section-grip:active,
+.grip:active {
+  cursor: grabbing;
+}
+
+.section-grip svg,
+.slot-bar svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.section-remove {
+  color: var(--copper);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.grid {
+  min-height: 1.6rem;
+}
+
+.slot {
+  position: relative;
+  width: var(--card-width);
+  flex: 0 0 var(--card-width);
+}
+
+.slot > .card {
+  width: 100%;
+  flex: none;
+}
+
+.slot-bar {
+  position: absolute;
+  z-index: 3;
+  top: 0.4rem;
+  left: 0.4rem;
+  display: flex;
+  gap: 0.05rem;
+  padding: 0.1rem;
+  background: color-mix(in srgb, var(--paper) 90%, white);
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.slot-bar button {
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.slot-bar button:hover,
+.slot-bar button:focus-visible,
+.section-grip:hover,
+.section-grip:focus-visible,
+.section-remove:hover,
+.section-remove:focus-visible {
+  background: var(--paper-2);
+  outline: none;
+}
+
+.slot-remove {
+  color: var(--copper);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .slot-bar {
+    opacity: 0;
+  }
+
+  .slot:hover .slot-bar,
+  .slot:focus-within .slot-bar {
+    opacity: 1;
+  }
+}
+
+.slot.is-ghost {
+  opacity: 0.45;
+}
+
+.slot.is-chosen > .card,
+.section.is-chosen {
+  outline: 2px dashed var(--leaf);
+  outline-offset: 3px;
+}
+
+dialog {
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1.1rem 1.15rem 1rem;
+  max-width: 28rem;
+  width: calc(100% - 2rem);
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  text-align: left;
+}
+
+dialog::backdrop {
+  background: color-mix(in srgb, var(--ink) 46%, transparent);
+}
+
+dialog h2 {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+dialog label {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.22rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+dialog label.check {
+  flex-direction: row;
+  align-items: center;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+dialog input,
+dialog textarea,
+dialog select {
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1.5px solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.55rem;
+}
+
+dialog input:focus,
+dialog textarea:focus,
+dialog select:focus {
+  outline: 2px solid var(--leaf);
+  outline-offset: 1px;
+  border-color: var(--leaf);
+}
+
+.dialog-note {
+  margin: 0.75rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+}
+
+.dialog-note code {
+  font-size: 0.85em;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
 @media (max-width: 680px) {
   .filter {
     flex: 1 1 100%;

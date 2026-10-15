@@ -7,51 +7,62 @@
   <title>KERI bookmarks</title>
   <meta name="description"
     content="A field guide to KERI search, visualisations, websites, conference videos, meetings, and working documents.">
+  <style>
+    html.layout-pending main {
+      visibility: hidden
+    }
+  </style>
+  <script>
+    try {
+      if (localStorage.getItem("keri-bookmarks-layout")) {
+        document.documentElement.classList.add("layout-pending");
+      }
+    } catch (e) { }
+    setTimeout(function () {
+      document.documentElement.classList.remove("layout-pending");
+    }, 2000);
+  </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&family=Public+Sans:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=9">
 </head>
 
 <body>
   <a class="skip" href="#main">Skip to bookmarks</a>
-
   <header class="site-header">
     <a class="brand" href="#top">
       <svg viewBox="0 0 64 64" aria-hidden="true">
-        <circle cx="32" cy="32" r="16" fill="none" stroke="#2a6b4a" stroke-width="6" />
+        <circle cx="32" cy="32" r="16" fill="none" stroke="#2a6b4a" stroke-width="6"></circle>
         <path d="M18 32c8-14 20-14 28 0-8 14-20 14-28 0z" fill="none" stroke="#a85a32" stroke-width="4"
-          stroke-linecap="round" />
-        <circle cx="32" cy="32" r="4.5" fill="#1c2b22" />
+          stroke-linecap="round"></path>
+        <circle cx="32" cy="32" r="4.5" fill="#1c2b22"></circle>
       </svg>
       KERI bookmarks
     </a>
-    <nav class="header-nav" aria-label="Sections">
-      <a href="#search">Search</a>
-      <a href="#visualisation">Visualisation</a>
-      <a href="#websites">Websites</a>
-      <a href="#tools">Tools</a>
-      <a href="#education">Education</a>
-      <a href="#tutorials">Tutorials</a>
-      <a href="#specifications">Specs</a>
-      <a href="#videos">Videos</a>
-      <a href="#wizard">Wizard</a>
-      <a href="#meetings">Meetings</a>
-      <a href="#docs">Google Docs</a>
-      <a href="#temporary">Temporary</a>
-    </nav>
+    <nav class="header-nav" aria-label="Sections"><a href="#visualisation">Visualisation</a><a
+        href="#search">Search</a><a href="#websites">Websites</a><a href="#tools">Tools</a><a
+        href="#education">Education</a><a href="#tutorials">Tutorials</a><a href="#specifications">Specs</a><a
+        href="#videos">Videos</a><a href="#wizard">Wizard</a><a href="#meetings">Meetings</a><a href="#docs">Google
+        Docs</a><a href="#temporary">Temporary</a><a href="#experimental">Experimental</a></nav>
     <label class="filter">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2" />
-        <path d="M16 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
+        <path d="M16 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
       </svg>
       <input id="filter" type="search" placeholder="Filter bookmarks">
     </label>
   </header>
-
+  <div class="editor-bar">
+    <button type="button" id="add-bookmark">Add bookmark</button>
+    <button type="button" id="add-section">Add section</button>
+    <button type="button" id="copy-html">Copy HTML</button>
+    <button type="button" id="reset-layout">Reset layout</button>
+    <p id="editor-status" role="status"></p>
+  </div>
   <section class="hero" id="top">
     <div>
       <p class="eyebrow">Key Event Receipt Infrastructure</p>
@@ -118,138 +129,830 @@
       </svg>
     </div> -->
   </section>
-
   <main id="main">
     <p id="empty" class="empty" hidden>No bookmarks match that filter.</p>
-
-    <section class="section" id="search">
-      <header class="section-head">
-        <span class="section-num">01</span>
-        <div>
-          <h2>Search</h2>
-          <p>Look up terms, scan the suite, or hunt through GitHub in one pass.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6" />
-          <circle cx="68" cy="52" r="28" fill="none" stroke="#2a6b4a" stroke-width="6" />
-          <path d="M90 74 118 98" stroke="#a85a32" stroke-width="7" stroke-linecap="round" />
-          <circle cx="60" cy="46" r="3" fill="#1c2b22" />
-          <circle cx="76" cy="46" r="3" fill="#1c2b22" />
-          <circle cx="68" cy="58" r="2.5" fill="#c4a574" />
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="ssi dictionary terms definitions acdc cesr keri toip vlei glossary kordwarshuis"
-          href="https://kordwarshuis.github.io/SSI-dictionary/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <rect x="28" y="22" width="92" height="96" rx="6" fill="#f7f1e4" stroke="#1c2b22" stroke-width="1.6" />
-              <rect x="120" y="18" width="96" height="104" rx="6" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-              <rect x="216" y="26" width="80" height="88" rx="6" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6" />
-              <g stroke="#2a6b4a" stroke-width="2" fill="none">
-                <path d="M42 44h64M42 58h48M42 72h56" />
-                <path d="M136 42h64M136 56h52M136 70h60M136 84h40" />
-                <path d="M230 48h52M230 62h40" />
-              </g>
-              <circle cx="168" cy="108" r="8" fill="#a85a32" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>SSI Dictionary</h3>
-            <p>Terms and definitions across ACDC, CESR, KERI, NIST, ToIP, and vLEI, with source filters.</p>
-            <span class="host">kordwarshuis.github.io</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="kerisse search engine glossary documentation weboftrust local index"
-          href="https://weboftrust.github.io/kerisse/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <circle cx="132" cy="68" r="42" fill="#f4eee3" stroke="#1c2b22" stroke-width="2" />
-              <circle cx="132" cy="68" r="26" fill="none" stroke="#2a6b4a" stroke-width="5" />
-              <path d="M164 98 214 128" stroke="#a85a32" stroke-width="8" stroke-linecap="round" />
-              <g fill="#1c2b22">
-                <circle cx="230" cy="38" r="4" />
-                <circle cx="258" cy="58" r="3" />
-                <circle cx="244" cy="78" r="3.5" />
-              </g>
-              <path d="M230 38 258 58 244 78 230 38" fill="none" stroke="#c4a574" stroke-width="1.5" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERISSE</h3>
-            <p>The KERI Suite search engine — an index that runs in your browser, not on a remote server.</p>
-            <span class="host">weboftrust.github.io</span>
-          </div>
-        </a>
-        <a class="card"
-          data-bookmark="github search repositories keri-foundation trustoverip blockchainbird issues pulls"
-          href="https://kordwarshuis.github.io/searchKERIrepos/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
-                <rect x="36" y="28" width="72" height="84" rx="10" />
-                <rect x="124" y="28" width="72" height="84" rx="10" />
-                <rect x="212" y="28" width="72" height="84" rx="10" />
-              </g>
-              <g fill="#2a6b4a">
-                <circle cx="72" cy="54" r="10" />
-                <circle cx="160" cy="54" r="10" />
-                <circle cx="248" cy="54" r="10" />
-              </g>
-              <path d="M72 64v20M160 64v20M248 64v20" stroke="#a85a32" stroke-width="3" />
-              <path d="M56 108h32M144 108h32M232 108h32" stroke="#1c2b22" stroke-width="3" stroke-linecap="round" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>Search KERI repos</h3>
-            <p>Multi-user GitHub search across keri-foundation, Trust over IP, and Blockchain Bird.</p>
-            <span class="host">kordwarshuis.github.io</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
     <section class="section" id="visualisation">
       <header class="section-head">
-        <span class="section-num">02</span>
+        <span class="section-num">01</span>
         <div>
           <h2>Visualisation</h2>
           <p>The KERI value system as a weighted, force-directed graph.</p>
         </div>
         <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6" />
+          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6"></rect>
           <g fill="#2a6b4a">
-            <circle cx="46" cy="58" r="10" />
-            <circle cx="86" cy="34" r="8" />
-            <circle cx="118" cy="62" r="12" />
-            <circle cx="78" cy="84" r="7" />
+            <circle cx="46" cy="58" r="10"></circle>
+            <circle cx="86" cy="34" r="8"></circle>
+            <circle cx="118" cy="62" r="12"></circle>
+            <circle cx="78" cy="84" r="7"></circle>
           </g>
           <g stroke="#a85a32" stroke-width="2" fill="none">
-            <path d="M46 58 86 34 118 62 78 84 46 58" />
+            <path d="M46 58 86 34 118 62 78 84 46 58"></path>
           </g>
         </svg>
       </header>
+      <div class="grid"></div>
+    </section>
+    <section class="section" id="search">
+      <header class="section-head">
+        <span class="section-num">02</span>
+        <div>
+          <h2>Search</h2>
+          <p>Look up terms, scan the suite, or hunt through GitHub in one pass.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <circle cx="68" cy="52" r="28" fill="none" stroke="#2a6b4a" stroke-width="6"></circle>
+          <path d="M90 74 118 98" stroke="#a85a32" stroke-width="7" stroke-linecap="round"></path>
+          <circle cx="60" cy="46" r="3" fill="#1c2b22"></circle>
+          <circle cx="76" cy="46" r="3" fill="#1c2b22"></circle>
+          <circle cx="68" cy="58" r="2.5" fill="#c4a574"></circle>
+        </svg>
+      </header>
+      <div class="grid"><a class="card"
+          data-bookmark="ssi dictionary terms definitions acdc cesr keri toip vlei glossary kordwarshuis"
+          href="https://kordwarshuis.github.io/SSI-dictionary/" target="_blank" rel="noopener noreferrer"
+          data-id="ssi-dictionary">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <rect x="28" y="22" width="92" height="96" rx="6" fill="#f7f1e4" stroke="#1c2b22" stroke-width="1.6">
+              </rect>
+              <rect x="120" y="18" width="96" height="104" rx="6" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
+              </rect>
+              <rect x="216" y="26" width="80" height="88" rx="6" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6">
+              </rect>
+              <g stroke="#2a6b4a" stroke-width="2" fill="none">
+                <path d="M42 44h64M42 58h48M42 72h56"></path>
+                <path d="M136 42h64M136 56h52M136 70h60M136 84h40"></path>
+                <path d="M230 48h52M230 62h40"></path>
+              </g>
+              <circle cx="168" cy="108" r="8" fill="#a85a32"></circle>
+            </svg> </div>
+          <div class="card-body">
+            <h3>SSI Dictionary</h3>
+            <p>Terms and definitions across ACDC, CESR, KERI, NIST, ToIP, and vLEI, with source filters.</p> <span
+              class="host">kordwarshuis.github.io</span>
+          </div>
+        </a> <a class="card" data-bookmark="kerisse search engine glossary documentation weboftrust local index"
+          href="https://weboftrust.github.io/kerisse/" target="_blank" rel="noopener noreferrer" data-id="kerisse">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <circle cx="132" cy="68" r="42" fill="#f4eee3" stroke="#1c2b22" stroke-width="2"></circle>
+              <circle cx="132" cy="68" r="26" fill="none" stroke="#2a6b4a" stroke-width="5"></circle>
+              <path d="M164 98 214 128" stroke="#a85a32" stroke-width="8" stroke-linecap="round"></path>
+              <g fill="#1c2b22">
+                <circle cx="230" cy="38" r="4"></circle>
+                <circle cx="258" cy="58" r="3"></circle>
+                <circle cx="244" cy="78" r="3.5"></circle>
+              </g>
+              <path d="M230 38 258 58 244 78 230 38" fill="none" stroke="#c4a574" stroke-width="1.5"></path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERISSE</h3>
+            <p>The KERI Suite search engine — an index that runs in your browser, not on a remote server.</p> <span
+              class="host">weboftrust.github.io</span>
+          </div>
+        </a> <a class="card"
+          data-bookmark="github search repositories keri-foundation trustoverip blockchainbird issues pulls"
+          href="https://kordwarshuis.github.io/searchKERIrepos/" target="_blank" rel="noopener noreferrer"
+          data-id="search-keri-repos">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
+                <rect x="36" y="28" width="72" height="84" rx="10"></rect>
+                <rect x="124" y="28" width="72" height="84" rx="10"></rect>
+                <rect x="212" y="28" width="72" height="84" rx="10"></rect>
+              </g>
+              <g fill="#2a6b4a">
+                <circle cx="72" cy="54" r="10"></circle>
+                <circle cx="160" cy="54" r="10"></circle>
+                <circle cx="248" cy="54" r="10"></circle>
+              </g>
+              <path d="M72 64v20M160 64v20M248 64v20" stroke="#a85a32" stroke-width="3"></path>
+              <path d="M56 108h32M144 108h32M232 108h32" stroke="#1c2b22" stroke-width="3" stroke-linecap="round">
+              </path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>Search KERI repos</h3>
+            <p>Multi-user GitHub search across keri-foundation, Trust over IP, and Blockchain Bird.</p> <span
+              class="host">kordwarshuis.github.io</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="websites">
+      <header class="section-head">
+        <span class="section-num">03</span>
+        <div>
+          <h2>Websites</h2>
+          <p>The foundation and the conference — home bases for the suite.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <path d="M28 86V48l26-18 26 18v38H28z" fill="#f4eee3" stroke="#1c2b22" stroke-width="1.8"></path>
+          <rect x="92" y="42" width="44" height="44" rx="6" fill="#fffdf8" stroke="#a85a32" stroke-width="1.8"></rect>
+          <circle cx="54" cy="70" r="7" fill="#2a6b4a"></circle>
+        </svg>
+      </header>
+      <div class="grid"><a class="card" data-bookmark="keri foundation website membership governance suite resources"
+          href="https://keri.foundation/" target="_blank" rel="noopener noreferrer" data-id="keri-foundation">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <path d="M40 118 L160 28 L280 118 Z" fill="#f4eee3" stroke="#1c2b22" stroke-width="2"></path>
+              <rect x="118" y="72" width="84" height="46" fill="#dfeadf" stroke="#1c2b22" stroke-width="1.6"></rect>
+              <circle cx="160" cy="78" r="16" fill="none" stroke="#2a6b4a" stroke-width="5"></circle>
+              <path d="M146 78c8-14 20-14 28 0-8 14-20 14-28 0z" fill="none" stroke="#a85a32" stroke-width="3"></path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI Foundation</h3>
+            <p>At the heart of the autonomous identity revolution — membership, governance, and suite resources.</p>
+            <span class="host">keri.foundation</span>
+          </div>
+        </a> <a class="card" data-bookmark="kericonf conference mini kericonf26 tickets program speakers"
+          href="https://kericonf.com/" target="_blank" rel="noopener noreferrer" data-id="keri-conference">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <path d="M36 110 L160 24 L284 110 Z" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"></path>
+              <rect x="132" y="70" width="56" height="40" fill="#a85a32"></rect>
+              <circle cx="160" cy="58" r="10" fill="#2a6b4a"></circle>
+              <path d="M70 110h180" stroke="#1c2b22" stroke-width="3"></path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI Conference</h3>
+            <p>Home of KERICONF and Mini KERICONF — program, speakers, recordings, and tickets.</p> <span
+              class="host">kericonf.com</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="tools">
+      <header class="section-head">
+        <span class="section-num">04</span>
+        <div>
+          <h2>Tools</h2>
+          <p>Hands-on utilities for schemas, logs, SAIDs, IPEX, and more.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <rect x="36" y="32" width="52" height="46" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8"></rect>
+          <circle cx="62" cy="55" r="10" fill="none" stroke="#2a6b4a" stroke-width="3.5"></circle>
+          <path d="M70 63l12 12" stroke="#a85a32" stroke-width="3.5" stroke-linecap="round"></path>
+          <g fill="#c4a574">
+            <rect x="104" y="36" width="28" height="8" rx="2"></rect>
+            <rect x="104" y="52" width="22" height="8" rx="2"></rect>
+            <rect x="104" y="68" width="32" height="8" rx="2"></rect>
+          </g>
+        </svg>
+      </header>
+      <div class="grid"><a class="card"
+          data-bookmark="keri help tools vast kelp saidify acdc ipex iv multisig dossier experimental"
+          href="https://keri.help/" target="_blank" rel="noopener noreferrer" data-id="keri-help">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
+                <rect x="28" y="28" width="80" height="40" rx="8"></rect>
+                <rect x="120" y="28" width="80" height="40" rx="8"></rect>
+                <rect x="212" y="28" width="80" height="40" rx="8"></rect>
+                <rect x="28" y="80" width="80" height="40" rx="8"></rect>
+                <rect x="120" y="80" width="80" height="40" rx="8"></rect>
+                <rect x="212" y="80" width="80" height="40" rx="8"></rect>
+              </g>
+              <g fill="#2a6b4a">
+                <circle cx="48" cy="48" r="5"></circle>
+                <circle cx="140" cy="48" r="5"></circle>
+                <circle cx="232" cy="48" r="5"></circle>
+                <circle cx="48" cy="100" r="5"></circle>
+                <circle cx="140" cy="100" r="5"></circle>
+                <circle cx="232" cy="100" r="5"></circle>
+              </g>
+            </svg> </div>
+          <div class="card-body">
+            <h3>keri.help</h3>
+            <p>A little help with KERI — schema topology, KEL parsing, SAIDs, IPEX, and more.</p> <span
+              class="host">keri.help</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="education">
+      <header class="section-head">
+        <span class="section-num">05</span>
+        <div>
+          <h2>Education</h2>
+          <p>Tutorials, concept cards, and step-by-step learning from the foundation.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <path d="M28 78 V38 l52-14 52 14 v40 l-52 14-52-14z" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
+          </path>
+          <path d="M80 24 v68" stroke="#a85a32" stroke-width="2.2"></path>
+          <circle cx="80" cy="52" r="6" fill="#2a6b4a"></circle>
+        </svg>
+      </header>
+      <div class="grid"><a class="card"
+          data-bookmark="education keri learning hub tutorials cards misconceptions explanations"
+          href="https://keri.foundation/edu/" target="_blank" rel="noopener noreferrer" data-id="keri-learning-hub">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <path d="M40 108 V42 l120-18 120 18 v66 l-120 18-120-18z" fill="#fffdf8" stroke="#1c2b22"
+                stroke-width="2"></path>
+              <path d="M160 24 v84" stroke="#a85a32" stroke-width="3"></path>
+              <path d="M70 58 h70 M70 74 h58 M70 90 h64 M190 58 h64 M190 74 h52" stroke="#2a6b4a" stroke-width="3"
+                stroke-linecap="round"></path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI Learning Hub</h3>
+            <p>Tutorials, concept cards, misconceptions, and step-by-step guides from the KERI Foundation.</p> <span
+              class="host">keri.foundation</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="tutorials">
+      <header class="section-head">
+        <span class="section-num">06</span>
+        <div>
+          <h2>Tutorials</h2>
+          <p>Narrative walkthroughs and jargon guides for learning the suite.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <path d="M38 78 V36 h84 v42 l-42 14-42-14z" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8"></path>
+          <path d="M52 48h56M52 60h44M52 72h36" stroke="#2a6b4a" stroke-width="2.2" stroke-linecap="round"></path>
+          <circle cx="118" cy="36" r="10" fill="#a85a32"></circle>
+        </svg>
+      </header>
+      <div class="grid"><a class="card"
+          data-bookmark="tutorial day in your life keri lf decentralized trust nicholas racz veridian dossier ovc vlei"
+          href="https://www.lfdecentralizedtrust.org/blog/a-day-in-your-life-with-keri" target="_blank"
+          rel="noopener noreferrer" data-id="a-day-in-your-life-with-keri">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <circle cx="88" cy="70" r="36" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"></circle>
+              <path d="M88 46v24l16 10" fill="none" stroke="#2a6b4a" stroke-width="3.5" stroke-linecap="round"></path>
+              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
+                <rect x="148" y="28" width="48" height="36" rx="6"></rect>
+                <rect x="208" y="28" width="48" height="36" rx="6"></rect>
+                <rect x="148" y="76" width="48" height="36" rx="6"></rect>
+                <rect x="208" y="76" width="48" height="36" rx="6"></rect>
+              </g>
+              <g fill="#a85a32">
+                <circle cx="172" cy="46" r="4"></circle>
+                <circle cx="232" cy="46" r="4"></circle>
+                <circle cx="172" cy="94" r="4"></circle>
+                <circle cx="232" cy="94" r="4"></circle>
+              </g>
+            </svg> </div>
+          <div class="card-body">
+            <h3>A Day in your Life with KERI</h3>
+            <p>One wallet, one day: verified calling, healthcare check-in, vLEI signing, and key recovery.</p> <span
+              class="host">lfdecentralizedtrust.org</span>
+          </div>
+        </a> <a class="card" data-bookmark="tutorial keri jargon nutshell part 1 finema terminology glossary"
+          href="https://medium.com/finema/keri-jargon-in-a-nutshell-part-1-fb554d58f9d0" target="_blank"
+          rel="noopener noreferrer" data-id="keri-jargon-part-1">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <rect x="40" y="24" width="100" height="92" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2">
+              </rect>
+              <path d="M58 48h64M58 64h52M58 80h44" stroke="#2a6b4a" stroke-width="3" stroke-linecap="round"></path>
+              <circle cx="210" cy="70" r="42" fill="#e7efe4" stroke="#1c2b22" stroke-width="2"></circle> <text x="210"
+                y="78" text-anchor="middle" fill="#a85a32" font-family="Fraunces, serif" font-size="28"
+                font-weight="600">1</text>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI Jargon · Part 1</h3>
+            <p>Core terminology of the suite, explained in plain language.</p> <span
+              class="host">medium.com/finema</span>
+          </div>
+        </a> <a class="card"
+          data-bookmark="tutorial keri jargon nutshell part 2 said acdc authentic chained data containers finema"
+          href="https://medium.com/finema/keri-jargon-in-a-nutshell-part-2-said-and-acdc-de6bc544b95e" target="_blank"
+          rel="noopener noreferrer" data-id="keri-jargon-part-2">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
+                <rect x="36" y="38" width="72" height="64" rx="8"></rect>
+                <rect x="92" y="28" width="72" height="64" rx="8"></rect>
+                <rect x="148" y="38" width="72" height="64" rx="8"></rect>
+              </g>
+              <path d="M108 60h40M164 70h40" stroke="#a85a32" stroke-width="2.5" stroke-linecap="round"></path>
+              <circle cx="260" cy="70" r="32" fill="#efe6d4" stroke="#1c2b22" stroke-width="2"></circle> <text x="260"
+                y="78" text-anchor="middle" fill="#a85a32" font-family="Fraunces, serif" font-size="26"
+                font-weight="600">2</text>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI Jargon · Part 2</h3>
+            <p>SAID identifiers and ACDC credential containers.</p> <span class="host">medium.com/finema</span>
+          </div>
+        </a> <a class="card"
+          data-bookmark="tutorial keri jargon nutshell part 3 oobi ipex out of band introduction exchange finema"
+          href="https://medium.com/finema/keri-jargon-in-a-nutshell-part-3-oobi-and-ipex-2e6b222f4b87" target="_blank"
+          rel="noopener noreferrer" data-id="keri-jargon-part-3">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <circle cx="90" cy="70" r="28" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"></circle>
+              <circle cx="170" cy="70" r="28" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"></circle>
+              <path d="M118 70h24" stroke="#2a6b4a" stroke-width="3.5" stroke-linecap="round"></path>
+              <path d="M130 58l12 12-12 12" fill="none" stroke="#a85a32" stroke-width="2.5" stroke-linecap="round">
+              </path>
+              <circle cx="250" cy="70" r="32" fill="#e7efe4" stroke="#1c2b22" stroke-width="2"></circle> <text x="250"
+                y="78" text-anchor="middle" fill="#a85a32" font-family="Fraunces, serif" font-size="26"
+                font-weight="600">3</text>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI Jargon · Part 3</h3>
+            <p>OOBI introductions and IPEX credential exchange.</p> <span class="host">medium.com/finema</span>
+          </div>
+        </a> <a class="card" data-bookmark="tutorial hitchhikers guide keri part 1 finema introduction overview"
+          href="https://medium.com/finema/the-hitchhikers-guide-to-keri-part-1-51371f655bba" target="_blank"
+          rel="noopener noreferrer" data-id="hitchhiker-s-guide-part-1">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <path d="M48 108c24-48 56-72 96-72s72 24 96 72" fill="none" stroke="#2a6b4a" stroke-width="3.5"
+                stroke-linecap="round"></path>
+              <circle cx="144" cy="52" r="10" fill="#a85a32"></circle>
+              <path d="M144 62v28" stroke="#1c2b22" stroke-width="2.5"></path>
+              <rect x="220" y="28" width="64" height="84" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2">
+              </rect>
+              <path d="M234 48h36M234 64h28M234 80h32" stroke="#c4a574" stroke-width="2.5" stroke-linecap="round">
+              </path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>Hitchhiker's Guide · Part 1</h3>
+            <p>A friendly introduction to how KERI fits together.</p> <span class="host">medium.com/finema</span>
+          </div>
+        </a> <a class="card"
+          data-bookmark="tutorial kli heartnet sign verify kent bull keripy allie brett oobi witnesses"
+          href="https://www.kentbull.com/posts/kli-tutorial-heartnet/" target="_blank" rel="noopener noreferrer"
+          data-id="kli-heartnet">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <path
+                d="M120 78c0-18 14-28 28-28 8 0 14 4 20 12 6-8 12-12 20-12 14 0 28 10 28 28 0 28-48 46-48 46s-48-18-48-46z"
+                fill="#fffdf8" stroke="#a85a32" stroke-width="2.2"></path>
+              <circle cx="72" cy="52" r="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.8"></circle>
+              <circle cx="248" cy="52" r="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.8"></circle>
+              <path d="M88 52h40M192 52h40" stroke="#2a6b4a" stroke-width="2.5" stroke-linecap="round"
+                stroke-dasharray="4 4"></path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KLI · Heartnet</h3>
+            <p>Sign and verify messages with the KERI command line — a love-letter walkthrough.</p> <span
+              class="host">kentbull.com</span>
+          </div>
+        </a> <a class="card"
+          data-bookmark="tutorial kli abydos acdc issue verify credential kent bull schema athena treasure"
+          href="https://www.kentbull.com/posts/kli-tutorial-abydos/" target="_blank" rel="noopener noreferrer"
+          data-id="kli-abydos">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <path d="M40 108 L160 28 L280 108 Z" fill="#efe6d4" stroke="#1c2b22" stroke-width="2"></path>
+              <rect x="118" y="68" width="84" height="40" rx="4" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
+              </rect>
+              <circle cx="160" cy="88" r="8" fill="#a85a32"></circle>
+              <path d="M160 96v12" stroke="#2a6b4a" stroke-width="2.5"></path>
+              <g fill="#c4a574">
+                <circle cx="72" cy="96" r="5"></circle>
+                <circle cx="248" cy="96" r="5"></circle>
+              </g>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KLI · Abydos</h3>
+            <p>Issue and verify ACDC credentials with kli — treasure-hunting at the Osireion.</p> <span
+              class="host">kentbull.com</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="specifications">
+      <header class="section-head">
+        <span class="section-num">07</span>
+        <div>
+          <h2>Specifications</h2>
+          <p>KSWG specs, CESR, and ToIP glossaries published with Spec-Up-T.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <rect x="42" y="22" width="76" height="66" rx="6" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8"></rect>
+          <path d="M54 42h52M54 54h40M54 66h46" stroke="#2a6b4a" stroke-width="2.2" stroke-linecap="round"></path>
+          <circle cx="108" cy="78" r="10" fill="#a85a32"></circle>
+        </svg>
+      </header>
+      <div class="grid"><a class="card" data-bookmark="acdc authentic chained data containers specification kswg"
+          href="https://trustoverip.github.io/kswg-acdc-specification/" target="_blank" rel="noopener noreferrer"
+          data-id="acdc">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <rect x="36" y="38" width="88" height="68" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"></rect>
+              <rect x="116" y="28" width="88" height="68" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2">
+              </rect>
+              <rect x="196" y="38" width="88" height="68" rx="8" fill="#fffdf8" stroke="#2a6b4a" stroke-width="2">
+              </rect>
+              <path d="M124 62h-8M204 62h-8" stroke="#a85a32" stroke-width="3"></path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>ACDC</h3>
+            <p>Authentic Chained Data Containers — schemas, edges, and selective disclosure.</p> <span
+              class="host">trustoverip.github.io</span>
+          </div>
+        </a> <a class="card" data-bookmark="keri specification kswg key event receipt infrastructure aid"
+          href="https://trustoverip.github.io/kswg-keri-specification/" target="_blank" rel="noopener noreferrer"
+          data-id="keri-specification">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
+                <rect x="48" y="44" width="56" height="52" rx="8"></rect>
+                <rect x="132" y="32" width="56" height="64" rx="8"></rect>
+                <rect x="216" y="44" width="56" height="52" rx="8"></rect>
+              </g>
+              <path d="M104 70h28M188 70h28" stroke="#2a6b4a" stroke-width="3" stroke-dasharray="5 4"></path>
+              <circle cx="160" cy="64" r="8" fill="#a85a32"></circle>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI specification</h3>
+            <p>Identifiers, key events, and end-verifiable logs from the KERI Suite Working Group.</p> <span
+              class="host">trustoverip.github.io</span>
+          </div>
+        </a> <a class="card" data-bookmark="cesr composable event streaming representation encoding kswg"
+          href="https://trustoverip.github.io/kswg-cesr-specification/" target="_blank" rel="noopener noreferrer"
+          data-id="cesr">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <g fill="#1c2b22" font-family="Public Sans, sans-serif" font-size="16" font-weight="700"> <text x="40"
+                  y="82">E</text> <text x="88" y="82">A</text> <text x="136" y="82">B</text> <text x="184"
+                  y="82">0</text> <text x="232" y="82">A</text> </g>
+              <path d="M36 96h248" stroke="#2a6b4a" stroke-width="3" stroke-dasharray="8 6"></path>
+              <circle cx="160" cy="44" r="10" fill="#a85a32"></circle>
+            </svg> </div>
+          <div class="card-body">
+            <h3>CESR</h3>
+            <p>Composable Event Streaming Representation — text and binary encodings for the suite.</p> <span
+              class="host">trustoverip.github.io</span>
+          </div>
+        </a> <a class="card" data-bookmark="keri suite glossary terms definitions kswg spec-up"
+          href="https://trustoverip.github.io/kerisuite-glossary/" target="_blank" rel="noopener noreferrer"
+          data-id="keri-suite-glossary">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <rect x="58" y="24" width="92" height="96" rx="6" fill="#f7f1e4" stroke="#1c2b22" stroke-width="1.8">
+              </rect>
+              <rect x="150" y="20" width="112" height="104" rx="6" fill="#fffdf8" stroke="#1c2b22" stroke-width="2">
+              </rect>
+              <path d="M74 48h60M74 64h48M166 46h80M166 62h68M166 78h72" stroke="#2a6b4a" stroke-width="2.4"></path>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERI Suite Glossary</h3>
+            <p>Shared terms and definitions for the KERI suite, as a KSWG public review draft.</p> <span
+              class="host">trustoverip.github.io</span>
+          </div>
+        </a> <a class="card" data-bookmark="toip glossary main terms trust over ip spec-up"
+          href="https://glossary.trustoverip.org/" target="_blank" rel="noopener noreferrer" data-id="toip-glossary">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <circle cx="160" cy="70" r="44" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"></circle>
+              <path d="M138 70c12-22 32-22 44 0-12 22-32 22-44 0z" fill="none" stroke="#2a6b4a" stroke-width="5"></path>
+              <circle cx="160" cy="70" r="8" fill="#a85a32"></circle>
+            </svg> </div>
+          <div class="card-body">
+            <h3>ToIP Glossary</h3>
+            <p>The Trust over IP main glossary of terms across the ToIP stack.</p> <span
+              class="host">glossary.trustoverip.org</span>
+          </div>
+        </a> <a class="card" data-bookmark="ctwg terminology governance guide spec-up definitions curation"
+          href="https://trustoverip.github.io/ctwg-terminology-governance-guide/" target="_blank"
+          rel="noopener noreferrer" data-id="terminology-governance">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
+                <rect x="44" y="36" width="64" height="68" rx="8"></rect>
+                <rect x="128" y="36" width="64" height="68" rx="8"></rect>
+                <rect x="212" y="36" width="64" height="68" rx="8"></rect>
+              </g>
+              <path d="M76 58v28M160 58v28M244 58v28" stroke="#a85a32" stroke-width="3"></path>
+              <circle cx="76" cy="52" r="6" fill="#2a6b4a"></circle>
+              <circle cx="160" cy="52" r="6" fill="#2a6b4a"></circle>
+              <circle cx="244" cy="52" r="6" fill="#2a6b4a"></circle>
+            </svg> </div>
+          <div class="card-body">
+            <h3>Terminology Governance</h3>
+            <p>How ToIP writes, curates, and maintains terminology inside specifications.</p> <span
+              class="host">trustoverip.github.io</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="videos">
+      <header class="section-head">
+        <span class="section-num">08</span>
+        <div>
+          <h2>Conference videos</h2>
+          <p>Talk galleries and YouTube playlists from KERICONF and SEDI.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <rect x="28" y="28" width="104" height="56" rx="8" fill="#1c2b22"></rect>
+          <path d="M70 44l28 12-28 12z" fill="#f4eee3"></path>
+          <g fill="#a85a32">
+            <rect x="34" y="92" width="12" height="6" rx="1"></rect>
+            <rect x="52" y="92" width="12" height="6" rx="1"></rect>
+            <rect x="70" y="92" width="12" height="6" rx="1"></rect>
+          </g>
+        </svg>
+      </header>
+      <div class="grid"><a class="card" data-bookmark="kericonf26 videos gallery clips transcripts foundation"
+          href="https://keri.foundation/confs/2026/videos/" target="_blank" rel="noopener noreferrer"
+          data-id="kericonf26-gallery">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <rect x="36" y="24" width="248" height="92" rx="12" fill="#1c2b22"></rect>
+              <path d="M138 52l52 22-52 22z" fill="#f4eee3"></path>
+              <circle cx="64" cy="44" r="6" fill="#2a6b4a"></circle>
+              <circle cx="256" cy="96" r="6" fill="#a85a32"></circle>
+            </svg> </div>
+          <div class="card-body">
+            <h3>KERICONF26 gallery</h3>
+            <p>Official 2026 conference videos with top clips and searchable transcripts.</p> <span
+              class="host">keri.foundation</span>
+          </div>
+        </a> <a class="card" data-bookmark="sedi 2025 videos conference november gallery"
+          href="https://keri.foundation/confs/2026/videos/SEDI/2025-11-SEDI/" target="_blank" rel="noopener noreferrer"
+          data-id="sedi-2025-videos">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <rect x="48" y="20" width="224" height="100" rx="10" fill="#fffdf8" stroke="#1c2b22" stroke-width="2">
+              </rect>
+              <rect x="64" y="36" width="192" height="68" rx="6" fill="#1c2b22"></rect> <text x="160" y="76"
+                text-anchor="middle" fill="#f4eee3" font-family="Fraunces, serif" font-size="22">SEDI</text>
+            </svg> </div>
+          <div class="card-body">
+            <h3>SEDI 2025 videos</h3>
+            <p>Recordings from the November 2025 SEDI conference, in the same gallery player.</p> <span
+              class="host">keri.foundation</span>
+          </div>
+        </a> <a class="card" data-bookmark="youtube playlist kericonf 2026 day 1"
+          href="https://www.youtube.com/playlist?list=PLnHy2ee5UksOfPng7BGEN-XNVupzXpgSL" target="_blank"
+          rel="noopener noreferrer" data-id="youtube-day-1">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#f0d9cc"></rect>
+              <rect x="28" y="28" width="264" height="84" rx="16" fill="#a85a32"></rect>
+              <path d="M142 54l48 22-48 22z" fill="#f4eee3"></path> <text x="54" y="78" fill="#f4eee3"
+                font-family="Public Sans, sans-serif" font-size="11" font-weight="700">DAY 1</text>
+            </svg> </div>
+          <div class="card-body">
+            <h3>YouTube — Day 1</h3>
+            <p>KERI Conference 2026, first-day talks as a YouTube playlist.</p> <span class="host">youtube.com</span>
+          </div>
+        </a> <a class="card" data-bookmark="youtube playlist kericonf 2026 day 2"
+          href="https://www.youtube.com/playlist?list=PLnHy2ee5UksMjwBseKJ7ivXiYukRvI65a" target="_blank"
+          rel="noopener noreferrer" data-id="youtube-day-2">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#e7efe4"></rect>
+              <rect x="28" y="28" width="264" height="84" rx="16" fill="#2a6b4a"></rect>
+              <path d="M142 54l48 22-48 22z" fill="#f4eee3"></path> <text x="54" y="78" fill="#f4eee3"
+                font-family="Public Sans, sans-serif" font-size="11" font-weight="700">DAY 2</text>
+            </svg> </div>
+          <div class="card-body">
+            <h3>YouTube — Day 2</h3>
+            <p>KERI Conference 2026, second-day talks as a YouTube playlist.</p> <span class="host">youtube.com</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="wizard">
+      <header class="section-head">
+        <span class="section-num">09</span>
+        <div>
+          <h2>KERI Wizard</h2>
+          <p>Ask your way through the suite with a custom GPT.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <rect x="38" y="28" width="84" height="52" rx="26" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8"></rect>
+          <circle cx="68" cy="50" r="5" fill="#1c2b22"></circle>
+          <circle cx="92" cy="50" r="5" fill="#1c2b22"></circle>
+          <path d="M66 64c10 8 28 8 38 0" fill="none" stroke="#2a6b4a" stroke-width="3" stroke-linecap="round"></path>
+        </svg>
+      </header>
+      <div class="grid"><a class="card" data-bookmark="chatgpt keri wizard gpt assistant questions"
+          href="https://chatgpt.com/g/g-mTlHjxQCp-keri-wizard" target="_blank" rel="noopener noreferrer"
+          data-id="keri-wizard">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="140" fill="#efe6d4"></rect>
+              <rect x="70" y="22" width="180" height="96" rx="48" fill="#fffdf8" stroke="#1c2b22" stroke-width="2">
+              </rect>
+              <circle cx="132" cy="64" r="8" fill="#1c2b22"></circle>
+              <circle cx="188" cy="64" r="8" fill="#1c2b22"></circle>
+              <path d="M128 92c16 12 48 12 64 0" fill="none" stroke="#2a6b4a" stroke-width="4" stroke-linecap="round">
+              </path>
+              <path d="M230 34 248 18" stroke="#a85a32" stroke-width="3" stroke-linecap="round"></path>
+              <circle cx="254" cy="14" r="5" fill="#c4a574"></circle>
+            </svg> </div>
+          <div class="card-body"> <span class="badge gpt">GPT</span>
+            <h3>KERI Wizard</h3>
+            <p>A ChatGPT custom GPT for asking your way through the KERI suite.</p> <span
+              class="host">chatgpt.com</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="meetings">
+      <header class="section-head">
+        <span class="section-num">10</span>
+        <div>
+          <h2>Meetings</h2>
+          <p>The Trust over IP calendar on the Linux Foundation LFX platform.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <rect x="36" y="24" width="88" height="68" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8"></rect>
+          <rect x="36" y="24" width="88" height="16" fill="#2a6b4a"></rect>
+          <g fill="#a85a32">
+            <circle cx="54" cy="56" r="4"></circle>
+            <circle cx="80" cy="56" r="4"></circle>
+            <circle cx="106" cy="56" r="4"></circle>
+            <circle cx="54" cy="74" r="4"></circle>
+            <circle cx="80" cy="74" r="4"></circle>
+          </g>
+        </svg>
+      </header>
+      <div class="grid"><a class="card" data-bookmark="meetings toip lfx zoom linux foundation calendar"
+          href="https://zoom-lfx.platform.linuxfoundation.org/meetings/ToIP?view=month" target="_blank"
+          rel="noopener noreferrer" data-id="toip-meetings">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 420 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="420" height="220" fill="#e7efe4"></rect>
+              <rect x="48" y="28" width="324" height="164" rx="16" fill="#fffdf8" stroke="#1c2b22" stroke-width="2">
+              </rect>
+              <rect x="48" y="28" width="324" height="36" fill="#2a6b4a"></rect>
+              <g fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="12" font-weight="700"> <text x="68"
+                  y="52">ToIP · monthly</text> </g>
+              <g fill="#c4a574">
+                <circle cx="108" cy="96" r="8"></circle>
+                <circle cx="168" cy="96" r="8"></circle>
+                <circle cx="228" cy="96" r="8"></circle>
+                <circle cx="288" cy="96" r="8"></circle>
+                <circle cx="108" cy="140" r="8"></circle>
+                <circle cx="168" cy="140" r="8"></circle>
+                <circle cx="228" cy="140" r="8"></circle>
+                <circle cx="288" cy="140" r="8"></circle>
+              </g>
+              <circle cx="228" cy="140" r="11" fill="none" stroke="#a85a32" stroke-width="3"></circle>
+            </svg> </div>
+          <div class="card-body">
+            <h3>ToIP meetings</h3>
+            <p>Month view of Trust over IP working-group calls on LFX Meetings — including the rooms the KERI community
+              shows up in.</p> <span class="host">linuxfoundation.org</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="docs">
+      <header class="section-head">
+        <span class="section-num">11</span>
+        <div>
+          <h2>Google Docs</h2>
+          <p>The living spreadsheet behind the value-system graph.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <g stroke="#2a6b4a" stroke-width="1.4" fill="#fffdf8">
+            <rect x="32" y="22" width="96" height="66"></rect>
+            <path d="M32 38h96M32 54h96M32 70h96M64 22v66M96 22v66"></path>
+          </g>
+        </svg>
+      </header>
+      <div class="grid"><a class="card" data-bookmark="google docs spreadsheet sheets values vertices tags nodes"
+          href="https://docs.google.com/spreadsheets/d/154JBxUFADmhL2YtRu22aASuhrnteG0CdegILd1hy5jU/edit?pli=1&amp;gid=1745295798#gid=1745295798"
+          target="_blank" rel="noopener noreferrer" data-id="keri-value-system-spreadsheet">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 420 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="420" height="220" fill="#dfeadf"></rect>
+              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
+                <rect x="40" y="28" width="340" height="164" rx="8"></rect>
+              </g>
+              <g stroke="#2a6b4a" stroke-width="1.3">
+                <path d="M40 60h340M40 92h340M40 124h340M40 156h340"></path>
+                <path d="M120 28v164M220 28v164M320 28v164"></path>
+              </g>
+              <rect x="40" y="28" width="80" height="32" fill="#2a6b4a"></rect>
+              <rect x="220" y="92" width="100" height="32" fill="#a85a32" opacity=".85"></rect> <text x="52" y="50"
+                fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="11" font-weight="700">TAG</text>
+            </svg> </div>
+          <div class="card-body"> <span class="badge sheet">Sheet</span>
+            <h3>KERI value system spreadsheet</h3>
+            <p>Nodes, vertices, descriptions, and status flags that feed the visualisation — the working document, not
+              the rendered graph.</p> <span class="host">docs.google.com</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section is-draft" id="temporary">
+      <header class="section-head">
+        <span class="section-num">12</span>
+        <div>
+          <h2>Temporary</h2>
+          <p>Working copies and review builds that may move or be replaced.</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#f3ead4" stroke="#1c2b22" stroke-width="1.6"
+            stroke-dasharray="6 4"></rect>
+          <circle cx="80" cy="54" r="28" fill="none" stroke="#8a6a2a" stroke-width="3"></circle>
+          <path d="M62 54h36" stroke="#8a6a2a" stroke-width="3"></path>
+          <text x="80" y="88" text-anchor="middle" fill="#8a6a2a" font-family="Public Sans, sans-serif" font-size="9"
+            font-weight="700">DRAFT</text>
+        </svg>
+      </header>
+      <div class="grid"><a class="card" data-bookmark="temporary ietf specification spec-up xml pdf draft dwarshuis"
+          href="https://dwarshuis.com/test/spec-up-t-temp/IETF/index-all.html" target="_blank" rel="noopener noreferrer"
+          data-id="keri-ietf-output-test">
+          <div class="card-art" aria-hidden="true"> <svg viewBox="0 0 420 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="420" height="220" fill="#f3ead4"></rect>
+              <rect x="54" y="24" width="312" height="172" rx="10" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"
+                stroke-dasharray="8 5"></rect>
+              <g fill="#8a6a2a" font-family="Fraunces, serif"> <text x="76" y="64" font-size="22">KERI
+                  specification</text> <text x="76" y="92" font-size="13" font-style="italic">all documents · review
+                  build</text> </g>
+              <g font-family="Public Sans, sans-serif" font-size="11" font-weight="700">
+                <rect x="76" y="118" width="64" height="24" rx="12" fill="#2a6b4a"></rect> <text x="88" y="134"
+                  fill="#f4eee3">HTML</text>
+                <rect x="148" y="118" width="54" height="24" rx="12" fill="#a85a32"></rect> <text x="160" y="134"
+                  fill="#f4eee3">PDF</text>
+                <rect x="210" y="118" width="54" height="24" rx="12" fill="#1c2b22"></rect> <text x="222" y="134"
+                  fill="#f4eee3">XML</text>
+              </g>
+            </svg> </div>
+          <div class="card-body"> <span class="badge draft">Temporary</span>
+            <h3>KERI IETF Output test</h3>
+            <p>A landing page for every current output: Spec-Up HTML, IETF HTML, PDF, plain text, XML, and version
+              snapshots.</p> <span class="host">dwarshuis.com</span>
+          </div>
+        </a></div>
+    </section>
+    <section class="section" id="experimental" data-added="true">
+      <header class="section-head">
+        <span class="section-num">13</span>
+        <div>
+          <h2>Experimental</h2>
+          <p>Beta</p>
+        </div>
+        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
+          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6"></rect>
+          <circle cx="80" cy="54" r="26" fill="none" stroke="#2a6b4a" stroke-width="6"></circle>
+          <path d="M62 54c10-16 26-16 36 0-10 16-26 16-36 0z" fill="none" stroke="#a85a32" stroke-width="3.5"
+            stroke-linecap="round"></path>
+          <circle cx="80" cy="54" r="4" fill="#1c2b22"></circle>
+        </svg>
+      </header>
       <div class="grid">
-        <div class="card" data-bookmark="keri value system visualisation graph d3 nodes vertices tags conf26">
+        <div class="card" data-bookmark="keri value system visualisation graph d3 nodes vertices tags conf26"
+          data-id="keri-suite-terms">
           <a class="card-art" href="https://blockchainbird.github.io/KERI-value-system-visualisation/" target="_blank"
             rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
             <svg viewBox="0 0 420 260" preserveAspectRatio="xMidYMid slice">
-              <rect width="420" height="260" fill="#dfeadf" />
+              <rect width="420" height="260" fill="#dfeadf"></rect>
               <g stroke="#c4a574" stroke-width="2.4" fill="none">
-                <path d="M70 140 160 80 250 120 330 70" />
-                <path d="M160 80 150 190 250 120 280 200 330 70" />
-                <path d="M70 140 150 190" />
+                <path d="M70 140 160 80 250 120 330 70"></path>
+                <path d="M160 80 150 190 250 120 280 200 330 70"></path>
+                <path d="M70 140 150 190"></path>
               </g>
               <g>
-                <circle cx="70" cy="140" r="16" fill="#2a6b4a" />
-                <circle cx="160" cy="80" r="22" fill="#a85a32" />
-                <circle cx="250" cy="120" r="18" fill="#1c2b22" />
-                <circle cx="330" cy="70" r="14" fill="#3d8f61" />
-                <circle cx="150" cy="190" r="13" fill="#c4a574" />
-                <circle cx="280" cy="200" r="15" fill="#2a6b4a" />
+                <circle cx="70" cy="140" r="16" fill="#2a6b4a"></circle>
+                <circle cx="160" cy="80" r="22" fill="#a85a32"></circle>
+                <circle cx="250" cy="120" r="18" fill="#1c2b22"></circle>
+                <circle cx="330" cy="70" r="14" fill="#3d8f61"></circle>
+                <circle cx="150" cy="190" r="13" fill="#c4a574"></circle>
+                <circle cx="280" cy="200" r="15" fill="#2a6b4a"></circle>
+              </g>
+              <g fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="8" font-weight="700"
+                text-anchor="middle">
+                <text x="160" y="84">SECU</text>
+                <text x="250" y="124">SAFE</text>
+                <text x="70" y="144">KEL</text>
+              </g>
+            </svg>
+          </a>
+          <div class="card-body">
+            <h3><a class="stretched" href="https://kordwarshuis.github.io/KERI-suite-term-visualiser/" target="_blank"
+                rel="noopener noreferrer">KERI Suite Terms</a></h3>
+            <p>An interactive D3 graph of KERI Suite Terms.</p>
+            <span class="host">blockchainbird.github.io</span>
+            <a class="repo-link" href="https://github.com/kordwarshuis/KERI-suite-term-visualiser" target="_blank"
+              rel="noopener noreferrer">
+              GitHub repository
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                <path d="M5 3h6v6M11 3 3 11" fill="none" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card" data-bookmark="keri value system visualisation graph d3 nodes vertices tags conf26"
+          data-id="keri-value-system">
+          <a class="card-art" href="https://blockchainbird.github.io/KERI-value-system-visualisation/" target="_blank"
+            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+            <svg viewBox="0 0 420 260" preserveAspectRatio="xMidYMid slice">
+              <rect width="420" height="260" fill="#dfeadf"></rect>
+              <g stroke="#c4a574" stroke-width="2.4" fill="none">
+                <path d="M70 140 160 80 250 120 330 70"></path>
+                <path d="M160 80 150 190 250 120 280 200 330 70"></path>
+                <path d="M70 140 150 190"></path>
+              </g>
+              <g>
+                <circle cx="70" cy="140" r="16" fill="#2a6b4a"></circle>
+                <circle cx="160" cy="80" r="22" fill="#a85a32"></circle>
+                <circle cx="250" cy="120" r="18" fill="#1c2b22"></circle>
+                <circle cx="330" cy="70" r="14" fill="#3d8f61"></circle>
+                <circle cx="150" cy="190" r="13" fill="#c4a574"></circle>
+                <circle cx="280" cy="200" r="15" fill="#2a6b4a"></circle>
               </g>
               <g fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="8" font-weight="700"
                 text-anchor="middle">
@@ -270,790 +973,132 @@
               GitHub repository
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
                 <path d="M5 3h6v6M11 3 3 11" fill="none" stroke="currentColor" stroke-width="1.7"
-                  stroke-linecap="round" />
+                  stroke-linecap="round"></path>
               </svg>
             </a>
           </div>
         </div>
-        <div class="card" data-bookmark="keri value system visualisation graph d3 nodes vertices tags conf26">
-          <a class="card-art" href="https://blockchainbird.github.io/KERI-value-system-visualisation/" target="_blank"
-            rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
-            <svg viewBox="0 0 420 260" preserveAspectRatio="xMidYMid slice">
-              <rect width="420" height="260" fill="#dfeadf" />
-              <g stroke="#c4a574" stroke-width="2.4" fill="none">
-                <path d="M70 140 160 80 250 120 330 70" />
-                <path d="M160 80 150 190 250 120 280 200 330 70" />
-                <path d="M70 140 150 190" />
-              </g>
-              <g>
-                <circle cx="70" cy="140" r="16" fill="#2a6b4a" />
-                <circle cx="160" cy="80" r="22" fill="#a85a32" />
-                <circle cx="250" cy="120" r="18" fill="#1c2b22" />
-                <circle cx="330" cy="70" r="14" fill="#3d8f61" />
-                <circle cx="150" cy="190" r="13" fill="#c4a574" />
-                <circle cx="280" cy="200" r="15" fill="#2a6b4a" />
-              </g>
-              <g fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="8" font-weight="700"
-                text-anchor="middle">
-                <text x="160" y="84">SECU</text>
-                <text x="250" y="124">SAFE</text>
-                <text x="70" y="144">KEL</text>
-              </g>
-            </svg>
-          </a>
-          <div class="card-body">
-            <h3><a class="stretched" href="https://kordwarshuis.github.io/KERI-suite-term-visualiser/"
-                target="_blank" rel="noopener noreferrer">KERI Suite Terms</a></h3>
-            <p>An interactive D3 graph of KERI Suite Terms.</p>
-            <span class="host">blockchainbird.github.io</span>
-            <a class="repo-link" href="https://github.com/kordwarshuis/KERI-suite-term-visualiser"
-              target="_blank" rel="noopener noreferrer">
-              GitHub repository
-              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
-                <path d="M5 3h6v6M11 3 3 11" fill="none" stroke="currentColor" stroke-width="1.7"
-                  stroke-linecap="round" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="websites">
-      <header class="section-head">
-        <span class="section-num">03</span>
-        <div>
-          <h2>Websites</h2>
-          <p>The foundation and the conference — home bases for the suite.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6" />
-          <path d="M28 86V48l26-18 26 18v38H28z" fill="#f4eee3" stroke="#1c2b22" stroke-width="1.8" />
-          <rect x="92" y="42" width="44" height="44" rx="6" fill="#fffdf8" stroke="#a85a32" stroke-width="1.8" />
-          <circle cx="54" cy="70" r="7" fill="#2a6b4a" />
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="keri foundation website membership governance suite resources"
-          href="https://keri.foundation/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <path d="M40 118 L160 28 L280 118 Z" fill="#f4eee3" stroke="#1c2b22" stroke-width="2" />
-              <rect x="118" y="72" width="84" height="46" fill="#dfeadf" stroke="#1c2b22" stroke-width="1.6" />
-              <circle cx="160" cy="78" r="16" fill="none" stroke="#2a6b4a" stroke-width="5" />
-              <path d="M146 78c8-14 20-14 28 0-8 14-20 14-28 0z" fill="none" stroke="#a85a32" stroke-width="3" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI Foundation</h3>
-            <p>At the heart of the autonomous identity revolution — membership, governance, and suite resources.</p>
-            <span class="host">keri.foundation</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="kericonf conference mini kericonf26 tickets program speakers"
-          href="https://kericonf.com/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <path d="M36 110 L160 24 L284 110 Z" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <rect x="132" y="70" width="56" height="40" fill="#a85a32" />
-              <circle cx="160" cy="58" r="10" fill="#2a6b4a" />
-              <path d="M70 110h180" stroke="#1c2b22" stroke-width="3" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI Conference</h3>
-            <p>Home of KERICONF and Mini KERICONF — program, speakers, recordings, and tickets.</p>
-            <span class="host">kericonf.com</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="tools">
-      <header class="section-head">
-        <span class="section-num">04</span>
-        <div>
-          <h2>Tools</h2>
-          <p>Hands-on utilities for schemas, logs, SAIDs, IPEX, and more.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6" />
-          <rect x="36" y="32" width="52" height="46" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-          <circle cx="62" cy="55" r="10" fill="none" stroke="#2a6b4a" stroke-width="3.5" />
-          <path d="M70 63l12 12" stroke="#a85a32" stroke-width="3.5" stroke-linecap="round" />
-          <g fill="#c4a574">
-            <rect x="104" y="36" width="28" height="8" rx="2" />
-            <rect x="104" y="52" width="22" height="8" rx="2" />
-            <rect x="104" y="68" width="32" height="8" rx="2" />
-          </g>
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card"
-          data-bookmark="keri help tools vast kelp saidify acdc ipex iv multisig dossier experimental"
-          href="https://keri.help/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
-                <rect x="28" y="28" width="80" height="40" rx="8" />
-                <rect x="120" y="28" width="80" height="40" rx="8" />
-                <rect x="212" y="28" width="80" height="40" rx="8" />
-                <rect x="28" y="80" width="80" height="40" rx="8" />
-                <rect x="120" y="80" width="80" height="40" rx="8" />
-                <rect x="212" y="80" width="80" height="40" rx="8" />
-              </g>
-              <g fill="#2a6b4a">
-                <circle cx="48" cy="48" r="5" />
-                <circle cx="140" cy="48" r="5" />
-                <circle cx="232" cy="48" r="5" />
-                <circle cx="48" cy="100" r="5" />
-                <circle cx="140" cy="100" r="5" />
-                <circle cx="232" cy="100" r="5" />
-              </g>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>keri.help</h3>
-            <p>A little help with KERI — schema topology, KEL parsing, SAIDs, IPEX, and more.</p>
-            <span class="host">keri.help</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="education">
-      <header class="section-head">
-        <span class="section-num">05</span>
-        <div>
-          <h2>Education</h2>
-          <p>Tutorials, concept cards, and step-by-step learning from the foundation.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6" />
-          <path d="M28 78 V38 l52-14 52 14 v40 l-52 14-52-14z" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-          <path d="M80 24 v68" stroke="#a85a32" stroke-width="2.2" />
-          <circle cx="80" cy="52" r="6" fill="#2a6b4a" />
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="education keri learning hub tutorials cards misconceptions explanations"
-          href="https://keri.foundation/edu/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <path d="M40 108 V42 l120-18 120 18 v66 l-120 18-120-18z" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <path d="M160 24 v84" stroke="#a85a32" stroke-width="3" />
-              <path d="M70 58 h70 M70 74 h58 M70 90 h64 M190 58 h64 M190 74 h52" stroke="#2a6b4a" stroke-width="3" stroke-linecap="round" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI Learning Hub</h3>
-            <p>Tutorials, concept cards, misconceptions, and step-by-step guides from the KERI Foundation.</p>
-            <span class="host">keri.foundation</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="tutorials">
-      <header class="section-head">
-        <span class="section-num">06</span>
-        <div>
-          <h2>Tutorials</h2>
-          <p>Narrative walkthroughs and jargon guides for learning the suite.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6" />
-          <path d="M38 78 V36 h84 v42 l-42 14-42-14z" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-          <path d="M52 48h56M52 60h44M52 72h36" stroke="#2a6b4a" stroke-width="2.2" stroke-linecap="round" />
-          <circle cx="118" cy="36" r="10" fill="#a85a32" />
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card"
-          data-bookmark="tutorial day in your life keri lf decentralized trust nicholas racz veridian dossier ovc vlei"
-          href="https://www.lfdecentralizedtrust.org/blog/a-day-in-your-life-with-keri" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <circle cx="88" cy="70" r="36" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <path d="M88 46v24l16 10" fill="none" stroke="#2a6b4a" stroke-width="3.5" stroke-linecap="round" />
-              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
-                <rect x="148" y="28" width="48" height="36" rx="6" />
-                <rect x="208" y="28" width="48" height="36" rx="6" />
-                <rect x="148" y="76" width="48" height="36" rx="6" />
-                <rect x="208" y="76" width="48" height="36" rx="6" />
-              </g>
-              <g fill="#a85a32">
-                <circle cx="172" cy="46" r="4" />
-                <circle cx="232" cy="46" r="4" />
-                <circle cx="172" cy="94" r="4" />
-                <circle cx="232" cy="94" r="4" />
-              </g>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>A Day in your Life with KERI</h3>
-            <p>One wallet, one day: verified calling, healthcare check-in, vLEI signing, and key recovery.</p>
-            <span class="host">lfdecentralizedtrust.org</span>
-          </div>
-        </a>
-        <a class="card"
-          data-bookmark="tutorial keri jargon nutshell part 1 finema terminology glossary"
-          href="https://medium.com/finema/keri-jargon-in-a-nutshell-part-1-fb554d58f9d0" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <rect x="40" y="24" width="100" height="92" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <path d="M58 48h64M58 64h52M58 80h44" stroke="#2a6b4a" stroke-width="3" stroke-linecap="round" />
-              <circle cx="210" cy="70" r="42" fill="#e7efe4" stroke="#1c2b22" stroke-width="2" />
-              <text x="210" y="78" text-anchor="middle" fill="#a85a32" font-family="Fraunces, serif" font-size="28"
-                font-weight="600">1</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI Jargon · Part 1</h3>
-            <p>Core terminology of the suite, explained in plain language.</p>
-            <span class="host">medium.com/finema</span>
-          </div>
-        </a>
-        <a class="card"
-          data-bookmark="tutorial keri jargon nutshell part 2 said acdc authentic chained data containers finema"
-          href="https://medium.com/finema/keri-jargon-in-a-nutshell-part-2-said-and-acdc-de6bc544b95e" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
-                <rect x="36" y="38" width="72" height="64" rx="8" />
-                <rect x="92" y="28" width="72" height="64" rx="8" />
-                <rect x="148" y="38" width="72" height="64" rx="8" />
-              </g>
-              <path d="M108 60h40M164 70h40" stroke="#a85a32" stroke-width="2.5" stroke-linecap="round" />
-              <circle cx="260" cy="70" r="32" fill="#efe6d4" stroke="#1c2b22" stroke-width="2" />
-              <text x="260" y="78" text-anchor="middle" fill="#a85a32" font-family="Fraunces, serif" font-size="26"
-                font-weight="600">2</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI Jargon · Part 2</h3>
-            <p>SAID identifiers and ACDC credential containers.</p>
-            <span class="host">medium.com/finema</span>
-          </div>
-        </a>
-        <a class="card"
-          data-bookmark="tutorial keri jargon nutshell part 3 oobi ipex out of band introduction exchange finema"
-          href="https://medium.com/finema/keri-jargon-in-a-nutshell-part-3-oobi-and-ipex-2e6b222f4b87" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <circle cx="90" cy="70" r="28" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <circle cx="170" cy="70" r="28" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <path d="M118 70h24" stroke="#2a6b4a" stroke-width="3.5" stroke-linecap="round" />
-              <path d="M130 58l12 12-12 12" fill="none" stroke="#a85a32" stroke-width="2.5" stroke-linecap="round" />
-              <circle cx="250" cy="70" r="32" fill="#e7efe4" stroke="#1c2b22" stroke-width="2" />
-              <text x="250" y="78" text-anchor="middle" fill="#a85a32" font-family="Fraunces, serif" font-size="26"
-                font-weight="600">3</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI Jargon · Part 3</h3>
-            <p>OOBI introductions and IPEX credential exchange.</p>
-            <span class="host">medium.com/finema</span>
-          </div>
-        </a>
-        <a class="card"
-          data-bookmark="tutorial hitchhikers guide keri part 1 finema introduction overview"
-          href="https://medium.com/finema/the-hitchhikers-guide-to-keri-part-1-51371f655bba" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <path d="M48 108c24-48 56-72 96-72s72 24 96 72" fill="none" stroke="#2a6b4a" stroke-width="3.5"
-                stroke-linecap="round" />
-              <circle cx="144" cy="52" r="10" fill="#a85a32" />
-              <path d="M144 62v28" stroke="#1c2b22" stroke-width="2.5" />
-              <rect x="220" y="28" width="64" height="84" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <path d="M234 48h36M234 64h28M234 80h32" stroke="#c4a574" stroke-width="2.5" stroke-linecap="round" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>Hitchhiker's Guide · Part 1</h3>
-            <p>A friendly introduction to how KERI fits together.</p>
-            <span class="host">medium.com/finema</span>
-          </div>
-        </a>
-        <a class="card"
-          data-bookmark="tutorial kli heartnet sign verify kent bull keripy allie brett oobi witnesses"
-          href="https://www.kentbull.com/posts/kli-tutorial-heartnet/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <path d="M120 78c0-18 14-28 28-28 8 0 14 4 20 12 6-8 12-12 20-12 14 0 28 10 28 28 0 28-48 46-48 46s-48-18-48-46z"
-                fill="#fffdf8" stroke="#a85a32" stroke-width="2.2" />
-              <circle cx="72" cy="52" r="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.8" />
-              <circle cx="248" cy="52" r="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.8" />
-              <path d="M88 52h40M192 52h40" stroke="#2a6b4a" stroke-width="2.5" stroke-linecap="round"
-                stroke-dasharray="4 4" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KLI · Heartnet</h3>
-            <p>Sign and verify messages with the KERI command line — a love-letter walkthrough.</p>
-            <span class="host">kentbull.com</span>
-          </div>
-        </a>
-        <a class="card"
-          data-bookmark="tutorial kli abydos acdc issue verify credential kent bull schema athena treasure"
-          href="https://www.kentbull.com/posts/kli-tutorial-abydos/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <path d="M40 108 L160 28 L280 108 Z" fill="#efe6d4" stroke="#1c2b22" stroke-width="2" />
-              <rect x="118" y="68" width="84" height="40" rx="4" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-              <circle cx="160" cy="88" r="8" fill="#a85a32" />
-              <path d="M160 96v12" stroke="#2a6b4a" stroke-width="2.5" />
-              <g fill="#c4a574">
-                <circle cx="72" cy="96" r="5" />
-                <circle cx="248" cy="96" r="5" />
-              </g>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KLI · Abydos</h3>
-            <p>Issue and verify ACDC credentials with kli — treasure-hunting at the Osireion.</p>
-            <span class="host">kentbull.com</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="specifications">
-      <header class="section-head">
-        <span class="section-num">07</span>
-        <div>
-          <h2>Specifications</h2>
-          <p>KSWG specs, CESR, and ToIP glossaries published with Spec-Up-T.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6" />
-          <rect x="42" y="22" width="76" height="66" rx="6" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-          <path d="M54 42h52M54 54h40M54 66h46" stroke="#2a6b4a" stroke-width="2.2" stroke-linecap="round" />
-          <circle cx="108" cy="78" r="10" fill="#a85a32" />
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="acdc authentic chained data containers specification kswg"
-          href="https://trustoverip.github.io/kswg-acdc-specification/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <rect x="36" y="38" width="88" height="68" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <rect x="116" y="28" width="88" height="68" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <rect x="196" y="38" width="88" height="68" rx="8" fill="#fffdf8" stroke="#2a6b4a" stroke-width="2" />
-              <path d="M124 62h-8M204 62h-8" stroke="#a85a32" stroke-width="3" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>ACDC</h3>
-            <p>Authentic Chained Data Containers — schemas, edges, and selective disclosure.</p>
-            <span class="host">trustoverip.github.io</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="keri specification kswg key event receipt infrastructure aid"
-          href="https://trustoverip.github.io/kswg-keri-specification/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
-                <rect x="48" y="44" width="56" height="52" rx="8" />
-                <rect x="132" y="32" width="56" height="64" rx="8" />
-                <rect x="216" y="44" width="56" height="52" rx="8" />
-              </g>
-              <path d="M104 70h28M188 70h28" stroke="#2a6b4a" stroke-width="3" stroke-dasharray="5 4" />
-              <circle cx="160" cy="64" r="8" fill="#a85a32" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI specification</h3>
-            <p>Identifiers, key events, and end-verifiable logs from the KERI Suite Working Group.</p>
-            <span class="host">trustoverip.github.io</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="cesr composable event streaming representation encoding kswg"
-          href="https://trustoverip.github.io/kswg-cesr-specification/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <g fill="#1c2b22" font-family="Public Sans, sans-serif" font-size="16" font-weight="700">
-                <text x="40" y="82">E</text>
-                <text x="88" y="82">A</text>
-                <text x="136" y="82">B</text>
-                <text x="184" y="82">0</text>
-                <text x="232" y="82">A</text>
-              </g>
-              <path d="M36 96h248" stroke="#2a6b4a" stroke-width="3" stroke-dasharray="8 6" />
-              <circle cx="160" cy="44" r="10" fill="#a85a32" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>CESR</h3>
-            <p>Composable Event Streaming Representation — text and binary encodings for the suite.</p>
-            <span class="host">trustoverip.github.io</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="keri suite glossary terms definitions kswg spec-up"
-          href="https://trustoverip.github.io/kerisuite-glossary/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <rect x="58" y="24" width="92" height="96" rx="6" fill="#f7f1e4" stroke="#1c2b22" stroke-width="1.8" />
-              <rect x="150" y="20" width="112" height="104" rx="6" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <path d="M74 48h60M74 64h48M166 46h80M166 62h68M166 78h72" stroke="#2a6b4a" stroke-width="2.4" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERI Suite Glossary</h3>
-            <p>Shared terms and definitions for the KERI suite, as a KSWG public review draft.</p>
-            <span class="host">trustoverip.github.io</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="toip glossary main terms trust over ip spec-up"
-          href="https://glossary.trustoverip.org/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <circle cx="160" cy="70" r="44" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <path d="M138 70c12-22 32-22 44 0-12 22-32 22-44 0z" fill="none" stroke="#2a6b4a" stroke-width="5" />
-              <circle cx="160" cy="70" r="8" fill="#a85a32" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>ToIP Glossary</h3>
-            <p>The Trust over IP main glossary of terms across the ToIP stack.</p>
-            <span class="host">glossary.trustoverip.org</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="ctwg terminology governance guide spec-up definitions curation"
-          href="https://trustoverip.github.io/ctwg-terminology-governance-guide/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8">
-                <rect x="44" y="36" width="64" height="68" rx="8" />
-                <rect x="128" y="36" width="64" height="68" rx="8" />
-                <rect x="212" y="36" width="64" height="68" rx="8" />
-              </g>
-              <path d="M76 58v28M160 58v28M244 58v28" stroke="#a85a32" stroke-width="3" />
-              <circle cx="76" cy="52" r="6" fill="#2a6b4a" />
-              <circle cx="160" cy="52" r="6" fill="#2a6b4a" />
-              <circle cx="244" cy="52" r="6" fill="#2a6b4a" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>Terminology Governance</h3>
-            <p>How ToIP writes, curates, and maintains terminology inside specifications.</p>
-            <span class="host">trustoverip.github.io</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="videos">
-      <header class="section-head">
-        <span class="section-num">08</span>
-        <div>
-          <h2>Conference videos</h2>
-          <p>Talk galleries and YouTube playlists from KERICONF and SEDI.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6" />
-          <rect x="28" y="28" width="104" height="56" rx="8" fill="#1c2b22" />
-          <path d="M70 44l28 12-28 12z" fill="#f4eee3" />
-          <g fill="#a85a32">
-            <rect x="34" y="92" width="12" height="6" rx="1" />
-            <rect x="52" y="92" width="12" height="6" rx="1" />
-            <rect x="70" y="92" width="12" height="6" rx="1" />
-          </g>
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="kericonf26 videos gallery clips transcripts foundation"
-          href="https://keri.foundation/confs/2026/videos/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <rect x="36" y="24" width="248" height="92" rx="12" fill="#1c2b22" />
-              <path d="M138 52l52 22-52 22z" fill="#f4eee3" />
-              <circle cx="64" cy="44" r="6" fill="#2a6b4a" />
-              <circle cx="256" cy="96" r="6" fill="#a85a32" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>KERICONF26 gallery</h3>
-            <p>Official 2026 conference videos with top clips and searchable transcripts.</p>
-            <span class="host">keri.foundation</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="sedi 2025 videos conference november gallery"
-          href="https://keri.foundation/confs/2026/videos/SEDI/2025-11-SEDI/" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <rect x="48" y="20" width="224" height="100" rx="10" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <rect x="64" y="36" width="192" height="68" rx="6" fill="#1c2b22" />
-              <text x="160" y="76" text-anchor="middle" fill="#f4eee3" font-family="Fraunces, serif"
-                font-size="22">SEDI</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>SEDI 2025 videos</h3>
-            <p>Recordings from the November 2025 SEDI conference, in the same gallery player.</p>
-            <span class="host">keri.foundation</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="youtube playlist kericonf 2026 day 1"
-          href="https://www.youtube.com/playlist?list=PLnHy2ee5UksOfPng7BGEN-XNVupzXpgSL" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#f0d9cc" />
-              <rect x="28" y="28" width="264" height="84" rx="16" fill="#a85a32" />
-              <path d="M142 54l48 22-48 22z" fill="#f4eee3" />
-              <text x="54" y="78" fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="11"
-                font-weight="700">DAY 1</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>YouTube — Day 1</h3>
-            <p>KERI Conference 2026, first-day talks as a YouTube playlist.</p>
-            <span class="host">youtube.com</span>
-          </div>
-        </a>
-        <a class="card" data-bookmark="youtube playlist kericonf 2026 day 2"
-          href="https://www.youtube.com/playlist?list=PLnHy2ee5UksMjwBseKJ7ivXiYukRvI65a" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#e7efe4" />
-              <rect x="28" y="28" width="264" height="84" rx="16" fill="#2a6b4a" />
-              <path d="M142 54l48 22-48 22z" fill="#f4eee3" />
-              <text x="54" y="78" fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="11"
-                font-weight="700">DAY 2</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>YouTube — Day 2</h3>
-            <p>KERI Conference 2026, second-day talks as a YouTube playlist.</p>
-            <span class="host">youtube.com</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="wizard">
-      <header class="section-head">
-        <span class="section-num">09</span>
-        <div>
-          <h2>KERI Wizard</h2>
-          <p>Ask your way through the suite with a custom GPT.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6" />
-          <rect x="38" y="28" width="84" height="52" rx="26" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-          <circle cx="68" cy="50" r="5" fill="#1c2b22" />
-          <circle cx="92" cy="50" r="5" fill="#1c2b22" />
-          <path d="M66 64c10 8 28 8 38 0" fill="none" stroke="#2a6b4a" stroke-width="3" stroke-linecap="round" />
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="chatgpt keri wizard gpt assistant questions"
-          href="https://chatgpt.com/g/g-mTlHjxQCp-keri-wizard" target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid slice">
-              <rect width="320" height="140" fill="#efe6d4" />
-              <rect x="70" y="22" width="180" height="96" rx="48" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <circle cx="132" cy="64" r="8" fill="#1c2b22" />
-              <circle cx="188" cy="64" r="8" fill="#1c2b22" />
-              <path d="M128 92c16 12 48 12 64 0" fill="none" stroke="#2a6b4a" stroke-width="4" stroke-linecap="round" />
-              <path d="M230 34 248 18" stroke="#a85a32" stroke-width="3" stroke-linecap="round" />
-              <circle cx="254" cy="14" r="5" fill="#c4a574" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <span class="badge gpt">GPT</span>
-            <h3>KERI Wizard</h3>
-            <p>A ChatGPT custom GPT for asking your way through the KERI suite.</p>
-            <span class="host">chatgpt.com</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="meetings">
-      <header class="section-head">
-        <span class="section-num">10</span>
-        <div>
-          <h2>Meetings</h2>
-          <p>The Trust over IP calendar on the Linux Foundation LFX platform.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6" />
-          <rect x="36" y="24" width="88" height="68" rx="8" fill="#fffdf8" stroke="#1c2b22" stroke-width="1.8" />
-          <rect x="36" y="24" width="88" height="16" fill="#2a6b4a" />
-          <g fill="#a85a32">
-            <circle cx="54" cy="56" r="4" />
-            <circle cx="80" cy="56" r="4" />
-            <circle cx="106" cy="56" r="4" />
-            <circle cx="54" cy="74" r="4" />
-            <circle cx="80" cy="74" r="4" />
-          </g>
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="meetings toip lfx zoom linux foundation calendar"
-          href="https://zoom-lfx.platform.linuxfoundation.org/meetings/ToIP?view=month" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 420 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="420" height="220" fill="#e7efe4" />
-              <rect x="48" y="28" width="324" height="164" rx="16" fill="#fffdf8" stroke="#1c2b22" stroke-width="2" />
-              <rect x="48" y="28" width="324" height="36" fill="#2a6b4a" />
-              <g fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="12" font-weight="700">
-                <text x="68" y="52">ToIP · monthly</text>
-              </g>
-              <g fill="#c4a574">
-                <circle cx="108" cy="96" r="8" />
-                <circle cx="168" cy="96" r="8" />
-                <circle cx="228" cy="96" r="8" />
-                <circle cx="288" cy="96" r="8" />
-                <circle cx="108" cy="140" r="8" />
-                <circle cx="168" cy="140" r="8" />
-                <circle cx="228" cy="140" r="8" />
-                <circle cx="288" cy="140" r="8" />
-              </g>
-              <circle cx="228" cy="140" r="11" fill="none" stroke="#a85a32" stroke-width="3" />
-            </svg>
-          </div>
-          <div class="card-body">
-            <h3>ToIP meetings</h3>
-            <p>Month view of Trust over IP working-group calls on LFX Meetings — including the rooms the KERI community
-              shows up in.</p>
-            <span class="host">linuxfoundation.org</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="docs">
-      <header class="section-head">
-        <span class="section-num">11</span>
-        <div>
-          <h2>Google Docs</h2>
-          <p>The living spreadsheet behind the value-system graph.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#efe6d4" stroke="#1c2b22" stroke-width="1.6" />
-          <g stroke="#2a6b4a" stroke-width="1.4" fill="#fffdf8">
-            <rect x="32" y="22" width="96" height="66" />
-            <path d="M32 38h96M32 54h96M32 70h96M64 22v66M96 22v66" />
-          </g>
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="google docs spreadsheet sheets values vertices tags nodes"
-          href="https://docs.google.com/spreadsheets/d/154JBxUFADmhL2YtRu22aASuhrnteG0CdegILd1hy5jU/edit?pli=1&gid=1745295798#gid=1745295798"
-          target="_blank" rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 420 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="420" height="220" fill="#dfeadf" />
-              <g fill="#fffdf8" stroke="#1c2b22" stroke-width="1.6">
-                <rect x="40" y="28" width="340" height="164" rx="8" />
-              </g>
-              <g stroke="#2a6b4a" stroke-width="1.3">
-                <path d="M40 60h340M40 92h340M40 124h340M40 156h340" />
-                <path d="M120 28v164M220 28v164M320 28v164" />
-              </g>
-              <rect x="40" y="28" width="80" height="32" fill="#2a6b4a" />
-              <rect x="220" y="92" width="100" height="32" fill="#a85a32" opacity=".85" />
-              <text x="52" y="50" fill="#f4eee3" font-family="Public Sans, sans-serif" font-size="11"
-                font-weight="700">TAG</text>
-            </svg>
-          </div>
-          <div class="card-body">
-            <span class="badge sheet">Sheet</span>
-            <h3>KERI value system spreadsheet</h3>
-            <p>Nodes, vertices, descriptions, and status flags that feed the visualisation — the working document, not
-              the rendered graph.</p>
-            <span class="host">docs.google.com</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section is-draft" id="temporary">
-      <header class="section-head">
-        <span class="section-num">12</span>
-        <div>
-          <h2>Temporary</h2>
-          <p>Working copies and review builds that may move or be replaced.</p>
-        </div>
-        <svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true">
-          <rect width="160" height="110" rx="16" fill="#f3ead4" stroke="#1c2b22" stroke-width="1.6"
-            stroke-dasharray="6 4" />
-          <circle cx="80" cy="54" r="28" fill="none" stroke="#8a6a2a" stroke-width="3" />
-          <path d="M62 54h36" stroke="#8a6a2a" stroke-width="3" />
-          <text x="80" y="88" text-anchor="middle" fill="#8a6a2a" font-family="Public Sans, sans-serif" font-size="9"
-            font-weight="700">DRAFT</text>
-        </svg>
-      </header>
-      <div class="grid">
-        <a class="card" data-bookmark="temporary ietf specification spec-up xml pdf draft dwarshuis"
-          href="https://dwarshuis.com/test/spec-up-t-temp/IETF/index-all.html" target="_blank"
-          rel="noopener noreferrer">
-          <div class="card-art" aria-hidden="true">
-            <svg viewBox="0 0 420 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="420" height="220" fill="#f3ead4" />
-              <rect x="54" y="24" width="312" height="172" rx="10" fill="#fffdf8" stroke="#1c2b22" stroke-width="2"
-                stroke-dasharray="8 5" />
-              <g fill="#8a6a2a" font-family="Fraunces, serif">
-                <text x="76" y="64" font-size="22">KERI specification</text>
-                <text x="76" y="92" font-size="13" font-style="italic">all documents · review build</text>
-              </g>
-              <g font-family="Public Sans, sans-serif" font-size="11" font-weight="700">
-                <rect x="76" y="118" width="64" height="24" rx="12" fill="#2a6b4a" />
-                <text x="88" y="134" fill="#f4eee3">HTML</text>
-                <rect x="148" y="118" width="54" height="24" rx="12" fill="#a85a32" />
-                <text x="160" y="134" fill="#f4eee3">PDF</text>
-                <rect x="210" y="118" width="54" height="24" rx="12" fill="#1c2b22" />
-                <text x="222" y="134" fill="#f4eee3">XML</text>
-              </g>
-            </svg>
-          </div>
-          <div class="card-body">
-            <span class="badge draft">Temporary</span>
-            <h3>KERI IETF Output test</h3>
-            <p>A landing page for every current output: Spec-Up HTML, IETF HTML, PDF, plain text, XML, and version
-              snapshots.</p>
-            <span class="host">dwarshuis.com</span>
-          </div>
-        </a>
       </div>
     </section>
   </main>
-
   <footer class="site-footer">
     <p><strong>KERI bookmarks</strong> — an illustrated index for the suite.</p>
-    <p>Open links in a new tab. Filter above to narrow the cabinet.</p>
+    <p>Drag the handles to rearrange. Additions stay in this browser until you copy the HTML and save it over this file.
+    </p>
   </footer>
-
+  <dialog id="bookmark-dialog" aria-labelledby="bookmark-dialog-title">
+    <form id="bookmark-form">
+      <h2 id="bookmark-dialog-title">Add bookmark</h2>
+      <div class="form-grid">
+        <label>
+          Title
+          <input id="bookmark-title" name="title" required maxlength="120">
+        </label>
+        <label>
+          Link
+          <input id="bookmark-url" name="url" type="url" required placeholder="https://">
+        </label>
+        <label>
+          Description
+          <textarea id="bookmark-description" name="description" rows="3" maxlength="280"></textarea>
+        </label>
+        <label>
+          Filter words
+          <input id="bookmark-keywords" name="keywords" placeholder="Words the filter should match">
+        </label>
+        <label>
+          GitHub repository
+          <input id="bookmark-repo" name="repo" type="url" placeholder="https://github.com/…">
+        </label>
+        <label>
+          Section
+          <select id="bookmark-section" name="section" required></select>
+        </label>
+        <div id="new-section-fields" hidden>
+          <label>
+            New section name
+            <input id="new-section-name" maxlength="80">
+          </label>
+          <label>
+            New section description
+            <input id="new-section-description" maxlength="180">
+          </label>
+          <label class="check">
+            <input id="new-section-draft" type="checkbox">
+            Mark as temporary
+          </label>
+        </div>
+      </div>
+      <p class="dialog-note">This stays in this browser until you copy the HTML and replace <code>index.html</code>.</p>
+      <div class="dialog-actions">
+        <button type="button" id="bookmark-cancel">Cancel</button>
+        <button type="submit" id="bookmark-save">Save bookmark</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="section-dialog" aria-labelledby="section-dialog-title">
+    <form id="section-form">
+      <h2 id="section-dialog-title">Add section</h2>
+      <div class="form-grid">
+        <label>
+          Name
+          <input id="section-name" name="name" required maxlength="80">
+        </label>
+        <label>
+          Description
+          <input id="section-description" name="description" maxlength="180">
+        </label>
+        <label class="check">
+          <input id="section-draft" name="draft" type="checkbox">
+          Mark as temporary
+        </label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" id="section-cancel">Cancel</button>
+        <button type="submit">Add section</button>
+      </div>
+    </form>
+  </dialog>
+  <script src="vendor/sortable.min.js"></script>
   <script src="script.js"></script>
+  <!-- Code injected by live-server -->
+  <script>
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+      (function () {
+        function refreshCSS() {
+          var sheets = [].slice.call(document.getElementsByTagName("link"));
+          var head = document.getElementsByTagName("head")[0];
+          for (var i = 0; i < sheets.length; ++i) {
+            var elem = sheets[i];
+            var parent = elem.parentElement || head;
+            parent.removeChild(elem);
+            var rel = elem.rel;
+            if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+              var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+              elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+            }
+            parent.appendChild(elem);
+          }
+        }
+        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+        var address = protocol + window.location.host + window.location.pathname + '/ws';
+        var socket = new WebSocket(address);
+        socket.onmessage = function (msg) {
+          if (msg.data == 'reload') window.location.reload();
+          else if (msg.data == 'refreshcss') refreshCSS();
+        };
+        if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+          console.log('Live reload enabled.');
+          sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+        }
+      })();
+    }
+    else {
+      console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+    }
+    // ]]>
+  </script>
 </body>
 
 </html>

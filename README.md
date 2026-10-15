@@ -4,6 +4,10 @@ A static field guide to [Key Event Receipt Infrastructure](https://keri.foundati
 
 Open `index.html` in a browser. There is no build step.
 
+Drag a card’s handle to reorder it, including into another section. Drag a section handle to reorder sections. The arrangement is stored in `localStorage` for this browser.
+
+**Add bookmark** and **Add section** keep new items in this browser. **Copy HTML** puts the current page on the clipboard — paste it over `index.html` and deploy that file when the new order should be the one everyone sees. **Reset layout** forgets this browser’s saved arrangement and reloads the file.
+
 ## Sections
 
 | Section | What it collects |
@@ -47,5 +51,6 @@ Put words people might type into `data-bookmark` (title, acronyms, host). The vi
 
 - `index.html` — page and bookmark cards
 - `styles.css` — layout and illustration styles
-- `script.js` — filter
+- `script.js` — filter, arranging, adding, and HTML export
+- `vendor/sortable.min.js` — [Sortable](https://github.com/SortableJS/Sortable) 1.15.6 (MIT), used to drag cards and sections
 - `favicon.svg` — site icon
