@@ -969,6 +969,7 @@ function init() {
     document.documentElement.classList.remove("layout-pending");
   }
   filterBookmarks();
+  filterInput?.focus();
   window.addEventListener("resize", () => {
     document.querySelectorAll(".slot").forEach((slot) => slot._syncSize?.());
   });
@@ -977,6 +978,23 @@ function init() {
 filterInput?.addEventListener("input", filterBookmarks);
 filterInput?.addEventListener("search", filterBookmarks);
 filterInput?.addEventListener("change", filterBookmarks);
+
+function isTypingTarget(el) {
+  if (!el || el === document.body) return false;
+  const tag = el.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return true;
+  if (el.isContentEditable) return true;
+  return Boolean(el.closest?.("dialog[open]"));
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "q" && event.key !== "Q") return;
+  if (event.metaKey || event.ctrlKey || event.altKey) return;
+  if (isTypingTarget(event.target)) return;
+  event.preventDefault();
+  filterInput?.focus();
+  filterInput?.select();
+});
 
 document.querySelector("#add-bookmark")?.addEventListener("click", () => openBookmarkDialog(null));
 document.querySelector("#add-section")?.addEventListener("click", () => openSectionDialog(null));

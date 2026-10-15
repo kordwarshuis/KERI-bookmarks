@@ -28,7 +28,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=11">
+  <link rel="stylesheet" href="styles.css?v=12">
   <style></style>
 </head>
 
@@ -54,7 +54,8 @@
         <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
         <path d="M16 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
       </svg>
-      <input id="filter" type="search" placeholder="Filter bookmarks">
+      <input id="filter" type="search" placeholder="Filter bookmarks" aria-describedby="filter-hint">
+      <kbd id="filter-hint" class="filter-hint">press q</kbd>
     </label>
   </header>
   <div class="editor-bar">
