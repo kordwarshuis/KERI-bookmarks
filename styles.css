@@ -159,20 +159,21 @@ a {
 
 .filter input {
   width: 100%;
-  border: 1.5px solid var(--line);
-  background: var(--paper);
+  border: 2.5px solid var(--ink);
+  background: #fffdf8;
   color: var(--ink);
   border-radius: 999px;
-  padding: 0.4rem 4.1rem 0.4rem 2rem;
+  padding: 0.45rem 4.1rem 0.45rem 2rem;
   font: inherit;
   font-size: 0.85rem;
   text-align: left;
+  box-shadow: 3px 3px 0 var(--ink);
 }
 
 .filter input:focus {
-  outline: 2px solid var(--leaf);
-  outline-offset: 1px;
+  outline: none;
   border-color: var(--leaf);
+  box-shadow: 3px 3px 0 var(--leaf);
 }
 
 .filter svg {
