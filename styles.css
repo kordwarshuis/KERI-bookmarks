@@ -221,7 +221,7 @@ a {
   text-align: center;
   gap: 1.4rem;
   padding: 2rem 1rem 1rem;
-  max-width: 44rem;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -331,7 +331,7 @@ main {
   justify-content: flex-start;
   gap: 1.6rem 1.1rem;
   padding: 0 1rem 4rem;
-  max-width: 68rem;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -341,7 +341,8 @@ main {
 
 .section {
   margin-top: 0;
-  flex: 0 1 auto;
+  flex: 1 1 100%;
+  width: 100%;
   max-width: 100%;
   scroll-margin-top: 9.5rem;
   text-align: left;
@@ -611,7 +612,7 @@ a.card-art {
   gap: 0.85rem;
   color: var(--ink-soft);
   font-size: 0.85rem;
-  max-width: 68rem;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
 }
@@ -964,7 +965,7 @@ dialog select:focus {
 @media (max-width: 680px) {
   .filter {
     flex: 1 1 100%;
-    max-width: 18rem;
+    width: 100%;
   }
 
   .filter input {
