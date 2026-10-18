@@ -74,12 +74,6 @@ function uniqueId(base, taken) {
   return candidate;
 }
 
-function hash(value) {
-  let h = 0;
-  for (const char of value) h = (h * 31 + char.codePointAt(0)) >>> 0;
-  return h;
-}
-
 function hostname(url) {
   try {
     return new URL(url).hostname.replace(/^www\./, "");
@@ -453,39 +447,13 @@ function filterBookmarks() {
   syncSorting();
 }
 
-function illustration(seed) {
-  const palettes = [
-    { bg: "#e7efe4", paper: "#fffdf8", ink: "#1c2b22", leaf: "#2a6b4a", copper: "#a85a32" },
-    { bg: "#efe6d4", paper: "#fffdf8", ink: "#1c2b22", leaf: "#2a6b4a", copper: "#a85a32" },
-    { bg: "#dfeadf", paper: "#f4eee3", ink: "#1c2b22", leaf: "#163828", copper: "#a85a32" },
-    { bg: "#f3ead4", paper: "#fffdf8", ink: "#1c2b22", leaf: "#2a6b4a", copper: "#8a6a2a" },
-  ];
-  const palette = palettes[hash(seed) % palettes.length];
-  const bodies = [
-    `<circle cx="160" cy="70" r="36" fill="${palette.paper}" stroke="${palette.ink}" stroke-width="2"/>
-     <circle cx="160" cy="70" r="18" fill="none" stroke="${palette.leaf}" stroke-width="5"/>
-     <path d="M146 70c8-14 20-14 28 0-8 14-20 14-28 0z" fill="none" stroke="${palette.copper}" stroke-width="3"/>
-     <circle cx="160" cy="70" r="4" fill="${palette.ink}"/>`,
-    `<g fill="${palette.paper}" stroke="${palette.ink}" stroke-width="1.8">
-       <rect x="48" y="28" width="68" height="84" rx="8"/>
-       <rect x="126" y="22" width="68" height="96" rx="8"/>
-       <rect x="204" y="28" width="68" height="84" rx="8"/>
-     </g>
-     <path d="M64 52h36M64 68h28M142 48h36M142 64h24M220 52h36" stroke="${palette.leaf}" stroke-width="3" stroke-linecap="round"/>
-     <circle cx="160" cy="96" r="6" fill="${palette.copper}"/>`,
-    `<path d="M46 102c30-52 68-70 114-70s84 18 114 70" fill="none" stroke="${palette.leaf}" stroke-width="3.5" stroke-linecap="round"/>
-     <circle cx="160" cy="48" r="12" fill="${palette.copper}"/>
-     <circle cx="92" cy="78" r="8" fill="${palette.ink}"/>
-     <circle cx="228" cy="78" r="8" fill="${palette.ink}"/>
-     <path d="M100 78h44M176 78h44" stroke="${palette.copper}" stroke-width="2" stroke-dasharray="4 4"/>`,
-    `<rect x="70" y="24" width="180" height="92" rx="14" fill="${palette.ink}"/>
-     <path d="M142 50l44 22-44 22z" fill="${palette.paper}"/>
-     <circle cx="98" cy="44" r="5" fill="${palette.leaf}"/>
-     <circle cx="222" cy="96" r="5" fill="${palette.copper}"/>`,
-  ];
-  const body = bodies[hash(`${seed}:art`) % bodies.length];
+function illustration() {
   return elementFromHTML(
-    `<svg viewBox="0 0 320 140" preserveAspectRatio="xMidYMid meet"><rect width="320" height="140" fill="${palette.bg}"/>${body}</svg>`,
+    `<svg viewBox="0 0 320 72" preserveAspectRatio="xMidYMid meet">
+      <rect width="320" height="72" fill="#e7efe4"/>
+      <path d="M160 14 L165.3 28.7 L180.9 29.2 L168.6 38.8 L172.9 53.8 L160 45 L147.1 53.8 L151.4 38.8 L139.1 29.2 L154.7 28.7 Z" fill="#2a6b4a"/>
+      <path d="M160 24 L162.4 31.2 L170 31.4 L164 36 L165.9 43.4 L160 39.2 L154.1 43.4 L156 36 L150 31.4 L157.6 31.2 Z" fill="#f4eee3"/>
+    </svg>`,
   );
 }
 
@@ -550,7 +518,7 @@ function buildCard(fields) {
   const art = document.createElement("div");
   art.className = "card-art";
   art.setAttribute("aria-hidden", "true");
-  art.appendChild(illustration(fields.title));
+  art.appendChild(illustration());
 
   const body = document.createElement("div");
   body.className = "card-body";
