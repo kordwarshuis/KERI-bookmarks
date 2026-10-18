@@ -178,8 +178,6 @@ function applyState() {
     if (existing) {
       existing.dataset.added = "true";
       applySectionMeta(existing, meta);
-      const mark = existing.querySelector(".section-mark");
-      mark?.replaceWith(elementFromHTML(sectionMark(Boolean(meta.draft))));
       return;
     }
     main.appendChild(buildSection(meta));
@@ -334,12 +332,7 @@ function sectionMeta(section) {
 
 function writeSection(section, meta) {
   applySectionMeta(section, meta);
-  if (section.dataset.added === "true") {
-    const mark = section.querySelector(".section-mark");
-    mark?.replaceWith(elementFromHTML(sectionMark(Boolean(meta.draft))));
-  } else {
-    section.dataset.custom = "true";
-  }
+  if (section.dataset.added !== "true") section.dataset.custom = "true";
 }
 
 function lockSlotSize(slot, card) {
@@ -457,11 +450,10 @@ function illustration() {
   );
 }
 
-function sectionMark(draft) {
-  if (draft) {
-    return `<svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true"><rect width="160" height="110" rx="16" fill="#f3ead4" stroke="#1c2b22" stroke-width="1.6" stroke-dasharray="6 4"/><circle cx="80" cy="54" r="22" fill="none" stroke="#8a6a2a" stroke-width="3"/><path d="M68 54h24" stroke="#8a6a2a" stroke-width="3" stroke-linecap="round"/></svg>`;
-  }
-  return `<svg class="section-mark" viewBox="0 0 160 110" aria-hidden="true"><rect width="160" height="110" rx="16" fill="#e7efe4" stroke="#1c2b22" stroke-width="1.6"/><circle cx="80" cy="54" r="26" fill="none" stroke="#2a6b4a" stroke-width="6"/><path d="M62 54c10-16 26-16 36 0-10 16-26 16-36 0z" fill="none" stroke="#a85a32" stroke-width="3.5" stroke-linecap="round"/><circle cx="80" cy="54" r="4" fill="#1c2b22"/></svg>`;
+function syncCardArt(root = document) {
+  root.querySelectorAll(".card-art").forEach((art) => {
+    art.replaceChildren(illustration());
+  });
 }
 
 function buildSection(meta) {
@@ -480,7 +472,7 @@ function buildSection(meta) {
   const blurb = document.createElement("p");
   blurb.textContent = meta.description || "";
   copy.append(heading, blurb);
-  header.append(num, elementFromHTML(sectionMark(Boolean(meta.draft))), copy);
+  header.append(num, copy);
   const grid = document.createElement("div");
   grid.className = "grid";
   section.append(header, grid);
@@ -954,6 +946,8 @@ function init() {
   try {
     applyState();
     assignIds(document);
+    document.querySelectorAll(".section-mark").forEach((mark) => mark.remove());
+    syncCardArt();
     document.querySelectorAll(".grid > .card").forEach(wrapCard);
     document.querySelectorAll(".section").forEach(decorateSection);
     document.querySelectorAll(".grid").forEach(bindGrid);

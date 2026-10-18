@@ -387,11 +387,6 @@ main {
   font-size: 0.88rem;
 }
 
-.section-mark {
-  width: 5.2rem;
-  height: 3.6rem;
-}
-
 .section.is-draft {
   --accent: var(--draft);
 }
@@ -974,10 +969,6 @@ dialog select:focus {
   }
 
   .filter-hint {
-    display: none;
-  }
-
-  .section-mark {
     display: none;
   }
 }
