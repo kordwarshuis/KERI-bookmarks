@@ -1,56 +1,34 @@
 # KERI bookmarks
 
-A static field guide to [Key Event Receipt Infrastructure](https://keri.foundation/) (KERI): search tools, visualisations, websites, tutorials, specifications, conference videos, meetings, and working documents.
+A static field guide to [Key Event Receipt Infrastructure](https://keri.foundation/) (KERI): search tools, visualisations, websites, tutorials, specifications, videos, meetings, and working documents.
 
-Open `index.html` in a browser. There is no build step.
-
-Drag a card’s handle to reorder it, including into another section. Drag a section handle to reorder sections. The pencil renames a section; the cross deletes that section and the bookmarks inside it. The arrangement is stored in `localStorage` for this browser.
-
-**Add bookmark** and **Add section** keep new items in this browser. **Copy HTML** puts the current page on the clipboard — paste it over `index.html` and deploy that file when the new order should be the one everyone sees. **Reset layout** forgets this browser’s saved arrangement and reloads the file.
-
-## Sections
-
-| Section | What it collects |
-| --- | --- |
-| Search | Term lookup, the KERI suite search engine, and GitHub search |
-| Visualisation | Value-system graph and term visualiser |
-| Websites | Foundation and conference sites |
-| Tools | Hands-on utilities (schemas, logs, SAIDs, IPEX, and more) |
-| Education | Learning hub and concept cards |
-| Tutorials | Narrative walkthroughs and jargon guides |
-| Specifications | KSWG specs (ACDC, KERI, CESR) and ToIP glossaries published with Spec-Up-T |
-| Conference videos | KERICONF and SEDI talk galleries and playlists |
-| KERI Wizard | A custom GPT for questions about the suite |
-| Meetings | Trust over IP calendar on the Linux Foundation LFX platform |
-| Google Docs | Spreadsheet behind the value-system graph |
-| Temporary | Working copies and review builds that may move or be replaced |
-
-The header filter matches text in each card’s `data-bookmark` attribute and hides sections that have no matches.
+Open `index.html` in a browser. There is no build step. The page reads the bookmark list from `bookmarks.js`.
 
 ## Add a bookmark
 
-Add a card inside the matching `<section class="section">` in `index.html`:
+Edit the JSON object in `bookmarks.js`. Each section has an `id`, `title`, `description`, and a `bookmarks` array.
 
-```html
-<a class="card" data-bookmark="keywords used by the filter"
-  href="https://example.com/" target="_blank" rel="noopener noreferrer">
-  <div class="card-art" aria-hidden="true">
-    <!-- optional illustration -->
-  </div>
-  <div class="card-body">
-    <h3>Title</h3>
-    <p>Short description.</p>
-    <span class="host">example.com</span>
-  </div>
-</a>
+```json
+{
+  "title": "Example",
+  "url": "https://example.com/",
+  "description": "Short description.",
+  "keywords": "words the filter should match"
+}
 ```
 
-Put words people might type into `data-bookmark` (title, acronyms, host). The visible title and description are not searched.
+Optional fields:
+
+- `badge` — a short label, such as `GPT` or `Sheet`
+- `repo` — a second link, shown as “GitHub repository”
+
+`keywords` is what the header filter searches, along with the title, description, and host. The header links are built from the sections, so a new section appears in the nav on its own.
 
 ## Files
 
-- `index.html` — page and bookmark cards
-- `styles.css` — layout and illustration styles
-- `script.js` — filter, arranging, adding, and HTML export
-- `vendor/sortable.min.js` — [Sortable](https://github.com/SortableJS/Sortable) 1.15.6 (MIT), used to drag cards and sections
+- `index.html` — page shell
+- `bookmarks.js` — the bookmark list, as one JSON object
+- `styles.css` — layout, aligned with [keri.foundation](https://keri.foundation/)
+- `script.js` — renders the list and filters it
+- `logo.png` — KERI Foundation logo
 - `favicon.svg` — site icon
